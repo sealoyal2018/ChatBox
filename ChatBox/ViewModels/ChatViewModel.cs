@@ -3,13 +3,21 @@
 using Stylet;
 
 namespace ChatBox.ViewModels;
-public class ChatViewModel
+public class ChatViewModel : Screen
 {
+    private string title;
+
+    public string Title
+    {
+        get => title;
+        set => SetAndNotify(ref title, value);
+    }
     private readonly BindableCollection<Chat> _chats;
     public BindableCollection<Chat> Chats => _chats;
 
     public ChatViewModel()
     {
+        title = "新话题";
         _chats =
         [
             new Chat
@@ -101,4 +109,7 @@ public class ChatViewModel
         ];
     }
 
+    public void SendMessage()
+    {
+    }
 }

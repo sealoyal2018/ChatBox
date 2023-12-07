@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:m="using:ChatBox.Models"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:s="using:Stylet.Xaml"
     xmlns:web="clr-namespace:TheArtOfDev.HtmlRenderer.Avalonia;assembly=Avalonia.HtmlRenderer"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -16,7 +17,7 @@
             BorderBrush="Gray"
             BorderThickness="0,1,0,0"
             DockPanel.Dock="Bottom">
-            <Grid ColumnDefinitions="*,auto">
+            <Grid MaxHeight="200" ColumnDefinitions="*,auto">
                 <TextBox
                     AcceptsReturn="True"
                     AcceptsTab="True"
@@ -25,7 +26,8 @@
                     Grid.Column="1"
                     Width="100"
                     VerticalAlignment="Bottom"
-                    HorizontalContentAlignment="Center">
+                    HorizontalContentAlignment="Center"
+                    Click="{s:Action SendMessage}">
                     发送
                 </Button>
             </Grid>
@@ -55,7 +57,8 @@
                                 Background="{Binding Background}"
                                 BorderThickness="1"
                                 CornerRadius="4,4,4,4">
-                                <c:Markdown Text="{Binding Body}" />
+                                <c:Markdown 
+                                    MaxWidth="500" Text="{Binding Body}" />
                             </Border>
                         </DockPanel>
                     </DataTemplate>

@@ -15,6 +15,6 @@ public partial class App : ChatBoxApplication
     {
         services.AddSingleton<MainViewModel>();
         services.AddSingleton<ShellViewModel>();
-        services.AddSingleton<ChatViewModel>();
+        services.AddTransient<ChatViewModel>();
     }
 }

@@ -95,10 +95,9 @@ public partial class Markdown : UserControl
     }
 }
 
-public class Request : IDisposable
+public class Request
 {
-    private bool disposedValue;
-    private static HttpClient http = new HttpClient();
+    private static readonly HttpClient http = new HttpClient();
 
     private class Body
     {
@@ -120,26 +119,6 @@ public class Request : IDisposable
         if (response.IsSuccessStatusCode)
             return await response.Content.ReadAsStringAsync();
         return text;
-    }
-
-    protected virtual void Dispose(bool disposing)
-    {
-        if (!disposedValue)
-        {
-            if (disposing)
-            {
-                http.Dispose();
-            }
-            http = null;
-            disposedValue = true;
-        }
-    }
-
-    public void Dispose()
-    {
-        // 不要更改此代码。请将清理代码放入“Dispose(bool disposing)”方法中
-        Dispose(disposing: true);
-        GC.SuppressFinalize(this);
     }
 }
 
