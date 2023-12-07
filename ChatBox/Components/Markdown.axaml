@@ -1,0 +1,15 @@
+<UserControl
+    x:Class="ChatBox.Components.Markdown"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:web="clr-namespace:TheArtOfDev.HtmlRenderer.Avalonia;assembly=Avalonia.HtmlRenderer"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <web:HtmlPanel
+        Name="_htmlPanel"
+        StylesheetLoad="StylesheetLoadHandle"
+        Text="{Binding Html}" />
+</UserControl>

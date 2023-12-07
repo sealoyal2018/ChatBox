@@ -1,0 +1,66 @@
+<UserControl
+    x:Class="ChatBox.Views.ChatView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:c="using:ChatBox.Components"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:m="using:ChatBox.Models"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:web="clr-namespace:TheArtOfDev.HtmlRenderer.Avalonia;assembly=Avalonia.HtmlRenderer"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <DockPanel LastChildFill="True">
+        <Border
+            Padding="10"
+            BorderBrush="Gray"
+            BorderThickness="0,1,0,0"
+            DockPanel.Dock="Bottom">
+            <Grid ColumnDefinitions="*,auto">
+                <TextBox
+                    AcceptsReturn="True"
+                    AcceptsTab="True"
+                    BorderThickness="0" />
+                <Button
+                    Grid.Column="1"
+                    Width="100"
+                    VerticalAlignment="Bottom"
+                    HorizontalContentAlignment="Center">
+                    发送
+                </Button>
+            </Grid>
+        </Border>
+        <ScrollViewer>
+            <ItemsControl
+                Padding="12,8"
+                ItemsSource="{Binding Chats}"
+                ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <DockPanel Margin="0,8,0,0" LastChildFill="True">
+                            <Image
+                                Width="32"
+                                Height="32"
+                                VerticalAlignment="Top"
+                                DockPanel.Dock="{Binding Dock}"
+                                Source="{Binding Avatar}" />
+                            <Border
+                                MaxWidth="500"
+                                HorizontalAlignment="{Binding HorizontalAlignment}"
+                                Background="{Binding Background}"
+                                BorderThickness="1"
+                                CornerRadius="4,4,4,4">
+                                <c:Markdown Text="{Binding Body}" />
+                            </Border>
+                        </DockPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </DockPanel>
+</UserControl>

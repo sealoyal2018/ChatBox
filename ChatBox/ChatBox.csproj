@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<AvaloniaResource Include="Assets\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="Assets\openai.png" />
+	</ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.0.6" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.0.6" />
+    <PackageReference Include="Avalonia.HtmlRenderer" Version="11.0.0" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.6" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.6" />
+    <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.6" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="Stylet.Avalonia" Version="0.4.0" />
+    <PackageReference Include="System.Reactive" Version="6.0.0" />
+  </ItemGroup>
+</Project>
