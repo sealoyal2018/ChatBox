@@ -22,7 +22,9 @@ public class ShellViewModel : Conductor<ChatViewModel>
 
     public void NewChat()
     {
-        ChatGroups.Add(new ChatViewModel());
+        var newChat = new ChatViewModel();
+        ChatGroups.Add(newChat);
+        ActivateItem(newChat);
     }
 
     public void EditChat(PointerReleasedEventArgs e)

@@ -15,17 +15,32 @@ public class ChatViewModel : Screen
     private readonly BindableCollection<Chat> _chats;
     public BindableCollection<Chat> Chats => _chats;
 
+    public bool VisibleChat => Chats.Count > 0;
+
     public ChatViewModel()
     {
         title = "新话题";
-        _chats =
-        [
-            new Chat
+        _chats = new BindableCollection<Chat>();
+        _chats.CollectionChanged += (sender, args) =>
+        {
+            NotifyOfPropertyChange(nameof(VisibleChat));
+        };
+    }
+
+    private int index = 0;
+    public void SendMessage()
+    {
+        if (index % 2 == 0)
+        {
+            Chats.Add(new Chat
             {
                 Body = "c# 中 JsonSerializer 如何序列化派生类属性",
                 Dock = Avalonia.Controls.Dock.Right
-            },
-            new Chat {
+            });
+        }
+        else
+        {
+            Chats.Add(new Chat {
                 Body = """
                 如果你想使用官方自带的序列化实现，可以使用 .NET Framework 内置的 DataContractJsonSerializer 类。这个类提供了将对象序列化为 JSON 格式和将 JSON 反序列化为对象的功能。
 
@@ -105,11 +120,8 @@ public class ChatViewModel : Screen
 
                 请注意，DataCo
                 """
-            },
-        ];
-    }
-
-    public void SendMessage()
-    {
+            });
+        }
+        index += 1;
     }
 }

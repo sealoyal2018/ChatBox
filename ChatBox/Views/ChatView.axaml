@@ -7,44 +7,24 @@
     xmlns:m="using:ChatBox.Models"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:s="using:Stylet.Xaml"
-    xmlns:web="clr-namespace:TheArtOfDev.HtmlRenderer.Avalonia;assembly=Avalonia.HtmlRenderer"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-    <DockPanel LastChildFill="True">
-        <Border
-            Padding="10"
-            BorderBrush="Gray"
-            BorderThickness="0,1,0,0"
-            DockPanel.Dock="Bottom">
-            <Grid MaxHeight="200" ColumnDefinitions="*,auto">
-                <TextBox
-                    AcceptsReturn="True"
-                    AcceptsTab="True"
-                    BorderThickness="0" />
-                <Button
-                    Grid.Column="1"
-                    Width="100"
-                    VerticalAlignment="Bottom"
-                    HorizontalContentAlignment="Center"
-                    Click="{s:Action SendMessage}">
-                    发送
-                </Button>
-            </Grid>
-        </Border>
-        <ScrollViewer>
+    
+    <Grid RowDefinitions="*,auto">
+        <ScrollViewer IsVisible="{Binding VisibleChat}">
             <ItemsControl
                 Padding="12,8"
                 ItemsSource="{Binding Chats}"
                 ScrollViewer.VerticalScrollBarVisibility="Auto">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <StackPanel />
+                        <StackPanel HorizontalAlignment="Stretch" Spacing="8" />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <DockPanel Margin="0,8,0,0" LastChildFill="True">
+                        <DockPanel HorizontalAlignment="Stretch" LastChildFill="True">
                             <Image
                                 Width="32"
                                 Height="32"
@@ -57,7 +37,7 @@
                                 Background="{Binding Background}"
                                 BorderThickness="1"
                                 CornerRadius="4,4,4,4">
-                                <c:Markdown 
+                                <c:Markdown
                                     MaxWidth="500" Text="{Binding Body}" />
                             </Border>
                         </DockPanel>
@@ -65,5 +45,27 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
-    </DockPanel>
+
+        <TextBlock IsVisible="{Binding !VisibleChat}" Text="开始提问吧～" HorizontalAlignment="Center" Margin="0,50,0,0"></TextBlock>
+
+        <Border
+            Padding="10"
+            Grid.Row="1">
+            <Grid MaxHeight="200" ColumnDefinitions="*,auto">
+                <TextBox
+                    AcceptsReturn="True"
+                    AcceptsTab="True"
+                    BorderThickness="1" />
+                <Button
+                    Grid.Column="1"
+                    Width="100"
+                    VerticalAlignment="Bottom"
+                    HorizontalContentAlignment="Center"
+                    Click="{s:Action SendMessage}">
+                    发送
+                </Button>
+            </Grid>
+        </Border>
+    </Grid>
+    
 </UserControl>

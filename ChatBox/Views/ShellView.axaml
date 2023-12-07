@@ -10,10 +10,11 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-    <Grid ColumnDefinitions="255,*">
-        <Border
-            Padding="12"
+    <Grid ColumnDefinitions="255,*" RowDefinitions="*,75">
+        <Border Padding="12"
             BorderBrush="LightGray"
+            Grid.Row="0"
+            Grid.Column="0"
             BorderThickness="0,0,1,0">
             <Grid RowDefinitions="auto,*">
                 <Button
@@ -35,16 +36,20 @@
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate DataType="vm:ChatViewModel">
-                                <Border PointerReleased="{s:Action SelectChat}" Background="Transparent" Cursor="Hand"  Padding="4" Margin="0,0,0,8" CornerRadius="4" BorderThickness="1" BorderBrush="Gray">
+                                <Border PointerReleased="{s:Action SelectChat}" Background="Transparent" Cursor="Hand"
+                                        Padding="4" Margin="0,0,0,8" CornerRadius="4" BorderThickness="1"
+                                        BorderBrush="Gray">
                                     <Grid ColumnDefinitions="Auto,*,Auto,Auto">
                                         <Image Height="24" Width="24" Margin="4" VerticalAlignment="Center"
                                                Source="avares://ChatBox/Assets/message.png">
                                         </Image>
                                         <TextBlock Grid.Column="1" Text="{Binding Title}" VerticalAlignment="Center"></TextBlock>
-                                        <Image PointerReleased="{s:Action EditChat}" Margin="4,4,0,4" Grid.Column="2" Height="24" Width="24" Source="avares://ChatBox/Assets/edit.png"
+                                        <Image PointerReleased="{s:Action EditChat}" Margin="4,4,0,4" Grid.Column="2"
+                                               Height="24" Width="24" Source="avares://ChatBox/Assets/edit.png"
                                                VerticalAlignment="Center">
                                         </Image>
-                                        <Image PointerReleased="{s:Action DeleteChat}" Margin="4" Height="24" Grid.Column="3" Width="24" Source="avares://ChatBox/Assets/delete.png"
+                                        <Image PointerReleased="{s:Action DeleteChat}" Margin="4" Height="24"
+                                               Grid.Column="3" Width="24" Source="avares://ChatBox/Assets/delete.png"
                                                VerticalAlignment="Center">
                                         </Image>
                                     </Grid>
@@ -55,6 +60,26 @@
                 </ScrollViewer>
             </Grid>
         </Border>
-        <ContentControl Grid.Column="1" s:View.Model="{Binding ActiveItem}" />
+
+        <Border
+            Grid.Column="0"
+            Padding="12,0"
+            Grid.Row="1" BorderThickness="0,1,1,0" BorderBrush="DarkGray">
+            <DockPanel LastChildFill="True">
+                <Border DockPanel.Dock="Left" Height="48" Width="48" ClipToBounds="True" CornerRadius="24">
+                    <Image Source="avares://ChatBox/Assets/user.jpg" 
+                           VerticalAlignment="Center">
+                    </Image>
+                </Border>
+                <Image DockPanel.Dock="Right" Source="avares://ChatBox/Assets/setting.png" Height="24" Width="24"
+                       VerticalAlignment="Center">
+                </Image>
+                <StackPanel Spacing="8" Margin="8,0" VerticalAlignment="Center">
+                    <TextBlock FontWeight="Bold">Chat AI</TextBlock>
+                    <TextBlock>今日剩余Tokens:3k</TextBlock>
+                </StackPanel>
+            </DockPanel>
+        </Border>
+        <ContentControl Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" s:View.Model="{Binding ActiveItem}" />
     </Grid>
 </UserControl>
