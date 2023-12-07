@@ -8,5 +8,20 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-    <ContentControl s:View.Model="{Binding ChatViewModel}" />
+    <Grid ColumnDefinitions="155,*">
+        <Border
+            Padding="12"
+            BorderBrush="LightGray"
+            BorderThickness="0,0,1,0">
+            <Grid RowDefinitions="auto,*">
+                <Button
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Center"
+                    CornerRadius="8">
+                    新话题
+                </Button>
+            </Grid>
+        </Border>
+        <ContentControl Grid.Column="1" s:View.Model="{Binding ChatViewModel}" />
+    </Grid>
 </UserControl>
