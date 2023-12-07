@@ -1,0 +1,16 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Width="600"
+        Height="350"
+        CanResize="False"
+        WindowStartupLocation="CenterOwner"
+        x:Class="ChatBox.Views.ChatSettingView"
+        Title="ChatSettingView">
+    <Grid Margin="10,20" ColumnDefinitions="100,*" RowDefinitions="Auto,*">
+        <TextBlock Grid.Row="0" VerticalAlignment="Center" Grid.Column="0">专属Key</TextBlock>
+        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Key}"></TextBox>
+    </Grid>
+</Window>

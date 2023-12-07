@@ -71,7 +71,7 @@
                            VerticalAlignment="Center">
                     </Image>
                 </Border>
-                <Image DockPanel.Dock="Right" Source="avares://ChatBox/Assets/setting.png" Height="24" Width="24"
+                <Image PointerReleased="{s:Action OpenSetting}" DockPanel.Dock="Right" Source="avares://ChatBox/Assets/setting.png" Height="24" Width="24"
                        VerticalAlignment="Center">
                 </Image>
                 <StackPanel Spacing="8" Margin="8,0" VerticalAlignment="Center">

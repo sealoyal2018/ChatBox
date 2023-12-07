@@ -1,7 +1,9 @@
-﻿using Avalonia.Controls;
+﻿using System.Threading.Tasks;
+using Avalonia.Controls;
 using Avalonia.Input;
 using ChatBox.Models;
 using Stylet;
+using Stylet.Avalonia;
 
 namespace ChatBox.ViewModels;
 public class ShellViewModel : Conductor<ChatViewModel>
@@ -52,6 +54,12 @@ public class ShellViewModel : Conductor<ChatViewModel>
             e.Handled = true;
         }
     }
-    
+
+    public async Task OpenSetting()
+    {
+        var windowManager = IoC.Get<IWindowManager>();
+        var settings = IoC.Get<ChatSettingViewModel>();
+        await windowManager.ShowDialog<bool>(settings);
+    }
     
 }

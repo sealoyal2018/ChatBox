@@ -30,7 +30,7 @@ public class ChatBoxApplication : StyletApplicationBase<MainViewModel>
         };
         services.AddSingleton(viewManagerConfig);
         services.AddSingleton<IViewManager, ViewManager>();
-        services.AddSingleton(this);
+        services.AddSingleton<IWindowManagerConfig>(this);
         services.AddSingleton<IWindowManager, WindowManager>();
         services.AddSingleton<IEventAggregator, EventAggregator>();
         services.AddSingleton<IMessageBoxViewModel, MessageBoxViewModel>();
