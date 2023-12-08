@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 using ChatBox.Components;
@@ -17,7 +18,7 @@ public class ChatViewModel : Screen
     private readonly IWindowManager _windowManager;
     private readonly IEventAggregator eventAggregator;
     private string title;
-    private string question = "你是谁？";
+    private string question = "写一段入门级的C#代码";
 
     public string Title
     {
@@ -32,6 +33,8 @@ public class ChatViewModel : Screen
     }
     
     private readonly BindableCollection<Chat> _chats;
+    private readonly ChatGpt bot;
+
     public BindableCollection<Chat> Chats => _chats;
 
     public bool VisibleChat => Chats.Count > 0;
@@ -47,6 +50,10 @@ public class ChatViewModel : Screen
         {
             NotifyOfPropertyChange(nameof(VisibleChat));
         };
+        this.bot = new ChatGpt("", config: new ChatGPT.Net.DTO.ChatGPT.ChatGptOptions
+        {
+            BaseUrl = "https://api.gptapi.us"
+        });
     }
 
     public async Task SendMessage()
@@ -60,24 +67,27 @@ public class ChatViewModel : Screen
         if (string.IsNullOrWhiteSpace(Question))
             return;
 
-        var bot = new ChatGpt(_chatSettingViewModel.Key, config: new ChatGPT.Net.DTO.ChatGPT.ChatGptOptions
+        bot.APIKey = _chatSettingViewModel.Key;
+
+        if(Chats.Count < 1)
         {
-            BaseUrl = "https://api.gptapi.us"
-        });
+            if (question.Length < 6)
+                Title = question[..question.Length];
+            else 
+                Title = question[..6];
+        }
         var questionChat = new UserChat(question);
         var newResponseChat = new BotChat();
-        Chats.Add(questionChat);
+        Execute.PostToUIThread(() => Chats.Add(questionChat));
         Question = string.Empty;
+        await Task.Delay(100);
         Chats.Add(newResponseChat);
-        await Task.Delay(1000).ContinueWith(async (_) =>
+        _ = Task.Run(async () =>
         {
-            await bot.AskStream((s) =>
-            {
-                this.eventAggregator.PublishOnUIThread(new StreamMessage(newResponseChat.Id, s));
-            }, questionChat.Body);
+            await Task.Delay(100);
+            var message = await bot.Ask(questionChat.Body);
+            this.eventAggregator.PublishOnUIThread(new ChatReceiveMessage(newResponseChat.Id, message));
         });
-
-        
         return;
     }
 }

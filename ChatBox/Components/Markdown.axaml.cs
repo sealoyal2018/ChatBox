@@ -11,9 +11,13 @@ using Avalonia.Platform;
 using Stylet;
 using Stylet.Avalonia;
 using System.Diagnostics;
+using Markdig;
+using System.Linq;
+using Markdig.Syntax;
 
 namespace ChatBox.Components;
-public partial class Markdown : UserControl, IHandle<StreamMessage>
+
+public partial class Markdown : UserControl
 {
     public static readonly StyledProperty<string> TextProperty;
     public static readonly StyledProperty<string> IdProperty;
@@ -43,22 +47,32 @@ public partial class Markdown : UserControl, IHandle<StreamMessage>
         TextProperty.Changed.Subscribe(e =>
         {
             var markdown = e.Sender as Markdown;
-            markdown.TextChanged(e.NewValue.Value);
+            markdown?.TextChanged(e.NewValue.Value);
         });
         IdProperty = AvaloniaProperty.Register<Markdown, string>("Id", string.Empty);
     }
 
-    private async void TextChanged(string? newValue)
+    private void TextChanged(string? newValue)
     {
         if (newValue is null)
         {
-            Html = string.Empty;
-            Execute.OnUIThread(() => this._htmlPanel.Text = Html);
+            Html = string.Empty; 
+            this._htmlPanel.Text = Html;
             return;
         }
-        var markdown = await Request.ConvertMarkdown(newValue);
-        Html = _htmlTemplate.Replace("#TEMPLATE", markdown);
-        Execute.OnUIThread(() => this._htmlPanel.Text = Html);
+        var pipeline = new MarkdownPipelineBuilder().UseAdvancedExtensions().Build();
+        var markdownDocument = Markdig.Markdown.Parse(newValue, pipeline);
+        if(markdownDocument.All(v=> v is ParagraphBlock))
+        {
+            Execute.PostToUIThread(()=> this._htmlPanel.Text = newValue);
+        }
+        else
+        {
+            //var markdown = markdownDocument.ToHtml();
+            var markdown = AsyncHelper.Sync(() => Request.ConvertMarkdown(newValue));
+            Html = _htmlTemplate.Replace("#TEMPLATE", markdown);
+            Execute.PostToUIThread(() => this._htmlPanel.Text = Html);
+        }
     }
     
     private void StylesheetLoadHandle(object? sender, TheArtOfDev.HtmlRenderer.Avalonia.HtmlRendererRoutedEventArgs<TheArtOfDev.HtmlRenderer.Core.Entities.HtmlStylesheetLoadEventArgs> e)
@@ -92,17 +106,11 @@ public partial class Markdown : UserControl, IHandle<StreamMessage>
 
     public Markdown()
     {
-        this.eventAggregator = IoC.Get<IEventAggregator>();
         InitializeComponent();
     }
 
     protected override async void OnLoaded(RoutedEventArgs e)
     {
-        if (!string.IsNullOrWhiteSpace(this.Id))
-        {
-            eventAggregator.Subscribe(this);
-        }
-
         if (markdownStyle is null)
         {
             using StreamReader sr = new StreamReader(AssetLoader.Open(new System.Uri("avares://ChatBox/Assets/github.markdown.css")));
@@ -110,27 +118,7 @@ public partial class Markdown : UserControl, IHandle<StreamMessage>
         }
         base.OnLoaded(e);
     }
-
-    protected override void OnUnloaded(RoutedEventArgs e)
-    {
-        if (!string.IsNullOrWhiteSpace(this.Id))
-        {
-            eventAggregator.Unsubscribe(this);
-        }
-        base.OnUnloaded(e);
-    }
-
-    public void Handle(StreamMessage message)
-    {
-        if(this.Id == message.Id)
-        {
-            Debug.WriteLine("receive>>>>>>>: "+ message.Content);
-            this.Text += message.Content;
-        }
-    }
 }
-
-public record StreamMessage(string Id, string Content);
 
 
 public class Request
