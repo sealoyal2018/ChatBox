@@ -8,8 +8,8 @@
 
 
 
+<img src="./images/preview.png" alt="preview.png" width="100%">
 
-![preview](E:\source\ChatBox\images\preview.png)
 
 
 
