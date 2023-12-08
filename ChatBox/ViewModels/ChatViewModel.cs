@@ -1,24 +1,40 @@
-﻿using ChatBox.Models;
-
+﻿using System;
+using System.Threading.Tasks;
+using ChatBox.Models;
+using OpenAI_API;
+using OpenAI_API.Models;
 using Stylet;
+using Stylet.Avalonia.Primitive;
 
 namespace ChatBox.ViewModels;
 public class ChatViewModel : Screen
 {
+    private readonly ChatSettingViewModel _chatSettingViewModel;
+    private readonly IWindowManager _windowManager;
     private string title;
+    private string question;
 
     public string Title
     {
         get => title;
         set => SetAndNotify(ref title, value);
     }
+
+    public string Question
+    {
+        get => question;
+        set => SetAndNotify(ref question, value);
+    }
+    
     private readonly BindableCollection<Chat> _chats;
     public BindableCollection<Chat> Chats => _chats;
 
     public bool VisibleChat => Chats.Count > 0;
 
-    public ChatViewModel()
+    public ChatViewModel(ChatSettingViewModel chatSettingViewModel,IWindowManager windowManager)
     {
+        _chatSettingViewModel = chatSettingViewModel;
+        _windowManager = windowManager;
         title = "新话题";
         _chats = new BindableCollection<Chat>();
         _chats.CollectionChanged += (sender, args) =>
@@ -28,8 +44,29 @@ public class ChatViewModel : Screen
     }
 
     private int index = 0;
-    public void SendMessage()
+    public async Task SendMessage()
     {
+        if (string.IsNullOrWhiteSpace(_chatSettingViewModel.Key))
+        {
+            await _windowManager.ShowMessageBox<bool>("请先配置openai key", "提示", MessageBoxButton.OK, MessageBoxImage.Error);
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(Question))
+            return;
+
+        OpenAIAPI openAiapi = new OpenAIAPI(_chatSettingViewModel.Key);
+        var chat = openAiapi.Chat.CreateConversation();
+        chat.Model = Model.AdaText;
+        chat.RequestParameters.Temperature = 0;
+        chat.AppendUserInput(Question);
+        await chat.StreamResponseFromChatbotAsync(res =>
+        {
+            Console.WriteLine("---: "+ res);
+        });
+
+        return;
+
         if (index % 2 == 0)
         {
             Chats.Add(new Chat

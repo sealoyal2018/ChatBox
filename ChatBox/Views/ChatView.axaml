@@ -54,6 +54,7 @@
             <Grid MaxHeight="200" ColumnDefinitions="*,auto">
                 <TextBox
                     AcceptsReturn="True"
+                    Text="{Binding Question}"
                     AcceptsTab="True"
                     BorderThickness="1" />
                 <Button

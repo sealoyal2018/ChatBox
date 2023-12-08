@@ -24,7 +24,7 @@ public class ShellViewModel : Conductor<ChatViewModel>
 
     public void NewChat()
     {
-        var newChat = new ChatViewModel();
+        var newChat = IoC.Get<ChatViewModel>();
         ChatGroups.Add(newChat);
         ActivateItem(newChat);
     }
