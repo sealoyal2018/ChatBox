@@ -5,10 +5,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:s="using:Stylet.Xaml"
-    Title="MainView"
+    Title="ChatBox"
     Width="1200"
-    WindowStartupLocation="CenterScreen"
     Height="700"
+    Icon="avares://ChatBox/Assets/logo.png"
+    WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <ContentControl s:View.Model="{Binding ShellViewModel}" />
 </Window>

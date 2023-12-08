@@ -50,10 +50,7 @@ public class ChatViewModel : Screen
         {
             NotifyOfPropertyChange(nameof(VisibleChat));
         };
-        this.bot = new ChatGpt("", config: new ChatGPT.Net.DTO.ChatGPT.ChatGptOptions
-        {
-            BaseUrl = "https://api.gptapi.us"
-        });
+        this.bot = new ChatGpt("");
     }
 
     public async Task SendMessage()
@@ -68,6 +65,7 @@ public class ChatViewModel : Screen
             return;
 
         bot.APIKey = _chatSettingViewModel.Key;
+        bot.Config.BaseUrl = _chatSettingViewModel.BaseUrl;
 
         if(Chats.Count < 1)
         {
