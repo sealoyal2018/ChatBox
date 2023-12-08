@@ -1,43 +1,31 @@
-﻿using Avalonia.Controls;
+﻿using System;
+using System.Text;
+using System.Threading.Tasks;
+
+using Avalonia.Controls;
 using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 
+using Stylet;
+using Stylet.Avalonia;
+
 namespace ChatBox.Models;
-public class Chat
+public abstract class Chat : PropertyChangedBase
 {
-    private readonly SolidColorBrush leftBackgrond;
-    private readonly SolidColorBrush rightBackground;
-    private readonly string botAvatar;
-    private readonly string userAvatar;
+    public abstract Dock Dock { get; }
+    public abstract HorizontalAlignment HorizontalAlignment { get; }
+    public abstract Brush Background { get; }
+    public abstract string Body { get;}
+    public abstract Bitmap Avatar { get; }
+    public virtual string Id { get; }
 
     public Chat()
     {
-        this.leftBackgrond = new SolidColorBrush(Color.Parse("#f4f6f8"));
-        this.rightBackground = new SolidColorBrush(Color.Parse("#d2f9d1"));
-        botAvatar = "avares://ChatBox/Assets/openai.png";
-        userAvatar = "avares://ChatBox/Assets/user.jpg";
-    }
-
-    public string Body { get; set; }
-    public Dock Dock { get; set; }
-
-
-    public HorizontalAlignment HorizontalAlignment
-    {
-        get => Dock.Left == Dock ? HorizontalAlignment.Left : HorizontalAlignment.Right;
-    }
-    public Brush Background
-    {
-        get => Dock.Left == Dock ? this.leftBackgrond : this.rightBackground;
-    }
-    public Bitmap Avatar
-    {
-        get
-        {
-            var avares = Dock.Left == Dock ? this.botAvatar : this.userAvatar;
-            return new Bitmap(AssetLoader.Open(new System.Uri(avares)));
-        }
+        Id = Guid.NewGuid().ToString("N");
     }
 }
+
+public record ChatReceiveMessage(string Id, string Body);
+

@@ -9,11 +9,14 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Platform;
 using Stylet;
+using Stylet.Avalonia;
+using System.Diagnostics;
 
 namespace ChatBox.Components;
-public partial class Markdown : UserControl
+public partial class Markdown : UserControl, IHandle<StreamMessage>
 {
     public static readonly StyledProperty<string> TextProperty;
+    public static readonly StyledProperty<string> IdProperty;
     private static string? markdownStyle;
     private string html;
     private static readonly string _htmlTemplate = """
@@ -32,6 +35,7 @@ public partial class Markdown : UserControl
         </body>
         </html>
         """;
+    private readonly IEventAggregator eventAggregator;
 
     static Markdown()
     {
@@ -41,6 +45,7 @@ public partial class Markdown : UserControl
             var markdown = e.Sender as Markdown;
             markdown.TextChanged(e.NewValue.Value);
         });
+        IdProperty = AvaloniaProperty.Register<Markdown, string>("Id", string.Empty);
     }
 
     private async void TextChanged(string? newValue)
@@ -74,6 +79,12 @@ public partial class Markdown : UserControl
         }
     }
 
+    public string Id
+    {
+        get => (string)GetValue(IdProperty);
+        set => this.SetValue(IdProperty, value);
+    }
+
     public string Html { 
         get => html; 
         set => html = value; 
@@ -81,11 +92,17 @@ public partial class Markdown : UserControl
 
     public Markdown()
     {
+        this.eventAggregator = IoC.Get<IEventAggregator>();
         InitializeComponent();
     }
 
     protected override async void OnLoaded(RoutedEventArgs e)
     {
+        if (!string.IsNullOrWhiteSpace(this.Id))
+        {
+            eventAggregator.Subscribe(this);
+        }
+
         if (markdownStyle is null)
         {
             using StreamReader sr = new StreamReader(AssetLoader.Open(new System.Uri("avares://ChatBox/Assets/github.markdown.css")));
@@ -93,7 +110,28 @@ public partial class Markdown : UserControl
         }
         base.OnLoaded(e);
     }
+
+    protected override void OnUnloaded(RoutedEventArgs e)
+    {
+        if (!string.IsNullOrWhiteSpace(this.Id))
+        {
+            eventAggregator.Unsubscribe(this);
+        }
+        base.OnUnloaded(e);
+    }
+
+    public void Handle(StreamMessage message)
+    {
+        if(this.Id == message.Id)
+        {
+            Debug.WriteLine("receive>>>>>>>: "+ message.Content);
+            this.Text += message.Content;
+        }
+    }
 }
+
+public record StreamMessage(string Id, string Content);
+
 
 public class Request
 {

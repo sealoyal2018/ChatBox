@@ -10,7 +10,7 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-    
+
     <Grid RowDefinitions="*,auto">
         <ScrollViewer IsVisible="{Binding VisibleChat}">
             <ItemsControl
@@ -38,7 +38,9 @@
                                 BorderThickness="1"
                                 CornerRadius="4,4,4,4">
                                 <c:Markdown
-                                    MaxWidth="500" Text="{Binding Body}" />
+                                    MaxWidth="500"
+                                    Id="{Binding Id}"
+                                    Text="{Binding Body}" />
                             </Border>
                         </DockPanel>
                     </DataTemplate>
@@ -46,17 +48,19 @@
             </ItemsControl>
         </ScrollViewer>
 
-        <TextBlock IsVisible="{Binding !VisibleChat}" Text="开始提问吧～" HorizontalAlignment="Center" Margin="0,50,0,0"></TextBlock>
+        <TextBlock
+            Margin="0,50,0,0"
+            HorizontalAlignment="Center"
+            IsVisible="{Binding !VisibleChat}"
+            Text="开始提问吧～" />
 
-        <Border
-            Padding="10"
-            Grid.Row="1">
+        <Border Grid.Row="1" Padding="10">
             <Grid MaxHeight="200" ColumnDefinitions="*,auto">
                 <TextBox
                     AcceptsReturn="True"
-                    Text="{Binding Question}"
                     AcceptsTab="True"
-                    BorderThickness="1" />
+                    BorderThickness="1"
+                    Text="{Binding Question}" />
                 <Button
                     Grid.Column="1"
                     Width="100"
@@ -68,5 +72,5 @@
             </Grid>
         </Border>
     </Grid>
-    
+
 </UserControl>
