@@ -43,7 +43,7 @@ public partial class Markdown : UserControl
 
     static Markdown()
     {
-        TextProperty = AvaloniaProperty.Register<Markdown, string>("Text", string.Empty);
+        TextProperty = AvaloniaProperty.Register<ChatBox.Components.Markdown, string>("Text", string.Empty);
         TextProperty.Changed.Subscribe(e =>
         {
             var markdown = e.Sender as Markdown;

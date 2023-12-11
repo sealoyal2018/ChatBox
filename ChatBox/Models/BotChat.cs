@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 using Avalonia.Controls;
@@ -15,13 +16,14 @@ using Stylet.Avalonia;
 namespace ChatBox.Models;
 public class BotChat : Chat, IHandle<ChatReceiveMessage>
 {
-    private StringBuilder bodyBuilder = new StringBuilder();
-
+    // private StringBuilder bodyBuilder = new StringBuilder();
+    private readonly string token = Guid.NewGuid().ToString("N");
+    private String bodyBuilder = String.Empty;
     public override Dock Dock => Dock.Left;
 
     public override HorizontalAlignment HorizontalAlignment => HorizontalAlignment.Left;
 
-    public override Brush Background => new SolidColorBrush(Color.Parse("#d2f9d1"));
+    public override Brush Background => new SolidColorBrush(Color.Parse("#f4f6f8"));
 
     public override Bitmap Avatar => new Bitmap(AssetLoader.Open(new System.Uri("avares://ChatBox/Assets/openai.png")));
 
@@ -38,9 +40,17 @@ public class BotChat : Chat, IHandle<ChatReceiveMessage>
     {
         if (message.Id == this.Id)
         {
-            Debug.WriteLine(message.Body);
-            this.bodyBuilder.Append(message.Body);
-            NotifyOfPropertyChange(nameof(Body));
+            Monitor.Enter(this);
+            try
+            {
+                Thread.Sleep(100);
+                bodyBuilder += message.Body;
+                NotifyOfPropertyChange(nameof(Body));
+            }
+            finally
+            {
+                Monitor.Exit(this);
+            }
         }
     }
 
