@@ -22,5 +22,6 @@ public partial class App : ChatBoxApplication
         services.AddSingleton<ISetting, OpenAiSetting>();
         services.AddSingleton<ISetting, CleanRecordSetting>();
         services.AddSingleton<ISetting, AboutSetting>();
+        services.AddSingleton<ISetting, PromptSetting>();
     }
 }

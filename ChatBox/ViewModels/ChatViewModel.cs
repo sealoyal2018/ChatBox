@@ -6,6 +6,7 @@ using Stylet.Avalonia.Primitive;
 using OpenAI;
 using OpenAI.Managers;
 using OpenAI.ObjectModels.RequestModels;
+using OpenAI.Interfaces;
 
 namespace ChatBox.ViewModels;
 public class ChatViewModel : Screen
@@ -91,7 +92,8 @@ public class ChatViewModel : Screen
             {
                 ChatMessage.FromUser(questionChat.Body)
             },
-            Model = _chatSettingViewModel.AiType,
+            //Model = _chatSettingViewModel.AiType,
+            Model = OpenAI.ObjectModels.Models.Dall_e_3,
         };
 
         _ = Task.Run(async () =>

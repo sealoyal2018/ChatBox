@@ -35,22 +35,4 @@ internal class Program
             })
             .LogToTrace();
     }
-    private static void SetCultureSpecificFontOptions(AppBuilder builder, string culture, string fontFamily)
-    {
-        if (Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName == culture)
-        {
-            FamilyNameCollection families = new(fontFamily);
-            _ = builder.With(new FontManagerOptions()
-            {
-                DefaultFamilyName = families.PrimaryFamilyName,
-                FontFallbacks = families
-                    .Skip(1)
-                    .Select(name => new FontFallback()
-                    {
-                        FontFamily = name
-                    })
-                    .ToList()
-            });
-        }
-    }
 }
