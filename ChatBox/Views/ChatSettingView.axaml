@@ -10,29 +10,54 @@
     CanResize="False"
     WindowStartupLocation="CenterOwner"
     mc:Ignorable="d">
-    <Grid
-        Margin="10,20"
-        ColumnDefinitions="100,*"
-        RowDefinitions="Auto,Auto,*">
-        <TextBlock
-            Grid.Row="0"
-            Grid.Column="0"
-            VerticalAlignment="Center">
-            api 地址
-        </TextBlock>
-        <TextBox
-            Grid.Row="0"
-            Grid.Column="1"
-            Text="{Binding BaseUrl}" />
-        <TextBlock
-            Grid.Row="1"
-            Grid.Column="0"
-            VerticalAlignment="Center">
-            专属 Key
-        </TextBlock>
-        <TextBox
-            Grid.Row="1"
-            Grid.Column="1"
-            Text="{Binding Key}" />
-    </Grid>
+    <StackPanel Margin="10,20" Spacing="8">
+        <DockPanel LastChildFill="True">
+            <TextBlock
+                Width="100"
+                VerticalAlignment="Center"
+                DockPanel.Dock="Left">
+                api提供商
+            </TextBlock>
+            <ComboBox ItemsSource="{Binding ApiProviders}" SelectedValue="{Binding ApiProvider}" />
+        </DockPanel>
+        <DockPanel IsVisible="{Binding IsShowDeployment}" LastChildFill="True">
+            <TextBlock
+                Width="100"
+                VerticalAlignment="Center"
+                DockPanel.Dock="Left">
+                部署id
+            </TextBlock>
+            <TextBox Text="{Binding DeploymentId}" />
+        </DockPanel>
+        <DockPanel LastChildFill="True">
+            <TextBlock
+                Width="100"
+                VerticalAlignment="Center"
+                DockPanel.Dock="Left">
+                模型
+            </TextBlock>
+            <ComboBox ItemsSource="{Binding AiTypes}" SelectedValue="{Binding AiType}" />
+        </DockPanel>
+        <DockPanel LastChildFill="True">
+            <TextBlock
+                Width="100"
+                VerticalAlignment="Center"
+                DockPanel.Dock="Left">
+                api 地址
+            </TextBlock>
+            <TextBox Text="{Binding BaseUrl}" />
+        </DockPanel>
+        <DockPanel LastChildFill="True">
+
+            <TextBlock
+                Width="100"
+                VerticalAlignment="Center"
+                DockPanel.Dock="Left">
+                专属 Key
+            </TextBlock>
+            <TextBox Text="{Binding Key}" />
+        </DockPanel>
+
+    </StackPanel>
+
 </Window>

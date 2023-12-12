@@ -41,10 +41,6 @@
                                 BorderThickness="1"
                                 Padding="8,4"
                                 CornerRadius="4,4,4,4">
-                                <!-- <c:Markdown -->
-                                <!--     MaxWidth="500" -->
-                                <!--     Id="{Binding Id}" -->
-                                <!--     Text="{Binding Body}" /> -->
                                 <md:MarkdownScrollViewer
                                     Markdown="{Binding Body}"/>
                             </Border>

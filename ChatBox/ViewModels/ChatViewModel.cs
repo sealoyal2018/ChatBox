@@ -18,13 +18,6 @@ public class ChatViewModel : Screen
     private string question = "写一段入门级的C#代码";
     private OpenAIService? _openAiService;
     
-
-    public string Title
-    {
-        get => title;
-        set => SetAndNotify(ref title, value);
-    }
-
     public string Question
     {
         get => question;
@@ -63,21 +56,24 @@ public class ChatViewModel : Screen
         {
             var apiKey = _chatSettingViewModel.Key;
             var baseUrl = _chatSettingViewModel.BaseUrl;
+            var providerType = _chatSettingViewModel.ApiProvider;
+            var deploymentId = _chatSettingViewModel.DeploymentId;
             _openAiService = new OpenAIService(new OpenAiOptions
             {
                 ApiKey = apiKey,
                 BaseDomain = baseUrl,
-                ProviderType = ProviderType.Azure
+                ProviderType = providerType,
+                DeploymentId = deploymentId
             });
         }
         if(Chats.Count < 1)
         {
-            if (question.Length < 6)
-                Title = question[..question.Length];
+            if (Question.Length < 6)
+                DisplayName = Question[..Question.Length];
             else 
-                Title = question[..6];
+                DisplayName = Question[..6];
         }
-        var questionChat = new UserChat(question);
+        var questionChat = new UserChat(Question);
         var newResponseChat = new BotChat();
         Chats.Add(questionChat);
         Question = string.Empty;
@@ -88,7 +84,7 @@ public class ChatViewModel : Screen
         {
             Messages = new List<ChatMessage>
             {
-                ChatMessage.FromUser("帮我一写一段c#入门级的代码！")
+                ChatMessage.FromUser(questionChat.Body)
             },
             Model = OpenAI.ObjectModels.Models.Gpt_3_5_Turbo,
         };

@@ -47,6 +47,7 @@ public class ShellViewModel : Conductor<ChatViewModel>
         if (e.Pointer.IsPrimary && e.Source is Image i && i.DataContext is ChatViewModel group)
         {
             ChatGroups.Remove(group);
+            NewChat();
             e.Handled = true;
         }
     }
