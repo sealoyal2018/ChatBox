@@ -1,4 +1,6 @@
 using Avalonia.Markup.Xaml;
+using ChatBox.Interfaces;
+using ChatBox.Services;
 using ChatBox.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -17,5 +19,7 @@ public partial class App : ChatBoxApplication
         services.AddSingleton<ShellViewModel>();
         services.AddSingleton<ChatSettingViewModel>();
         services.AddTransient<ChatViewModel>();
+        services.AddSingleton<ISetting, OpenAiSetting>();
+        services.AddSingleton<ISetting, CleanRecordSetting>();
     }
 }

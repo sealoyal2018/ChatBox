@@ -5,18 +5,19 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:ChatBox.ViewModels"
+    xmlns:i="https://github.com/projektanker/icons.avalonia"
     xmlns:s="using:Stylet.Xaml"
-    xmlns:m="using:ChatBox.Models"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-    <Grid ColumnDefinitions="255,*" RowDefinitions="*,75">
+    <Grid ColumnDefinitions="200,*">
         <Border Padding="12"
-            BorderBrush="LightGray"
-            Grid.Row="0"
-            Grid.Column="0"
-            BorderThickness="0,0,1,0">
-            <Grid RowDefinitions="auto,*">
+                BorderBrush="LightGray"
+                Grid.Row="0"
+                Grid.Column="0"
+                Background="#e7f8ff"
+                BorderThickness="0,0,1,0">
+            <Grid RowDefinitions="auto,*,auto">
                 <Button
                     HorizontalAlignment="Stretch"
                     HorizontalContentAlignment="Center"
@@ -43,8 +44,10 @@
                                         <Image Height="24" Width="24" Margin="4" VerticalAlignment="Center"
                                                Source="avares://ChatBox/Assets/message.png">
                                         </Image>
-                                        <TextBlock Grid.Column="1" Text="{Binding Title}" VerticalAlignment="Center"></TextBlock>
-                                        <Image PointerReleased="{s:Action EditChat}" Margin="4,4,0,4" Grid.Column="2"
+                                        <TextBlock Grid.Column="1" Text="{Binding DisplayName}"
+                                                   VerticalAlignment="Center">
+                                        </TextBlock>
+                                        <Image Margin="4,4,0,4" Grid.Column="2"
                                                Height="24" Width="24" Source="avares://ChatBox/Assets/edit.png"
                                                VerticalAlignment="Center">
                                         </Image>
@@ -58,27 +61,26 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </ScrollViewer>
-            </Grid>
-        </Border>
 
-        <Border
-            Grid.Column="0"
-            Padding="12,0"
-            Grid.Row="1" BorderThickness="0,1,1,0" BorderBrush="DarkGray">
-            <DockPanel LastChildFill="True">
-                <Border DockPanel.Dock="Left" Height="48" Width="48" ClipToBounds="True" CornerRadius="24">
-                    <Image Source="avares://ChatBox/Assets/user.jpg" 
-                           VerticalAlignment="Center">
-                    </Image>
-                </Border>
-                <Image PointerReleased="{s:Action OpenSetting}" DockPanel.Dock="Right" Source="avares://ChatBox/Assets/setting.png" Height="24" Width="24"
-                       VerticalAlignment="Center">
-                </Image>
-                <StackPanel Spacing="8" Margin="8,0" VerticalAlignment="Center">
-                    <TextBlock FontWeight="Bold">Chat AI</TextBlock>
-                    <TextBlock>今日剩余Tokens:3k</TextBlock>
-                </StackPanel>
-            </DockPanel>
+                <ItemsControl Grid.Row="2" ItemsSource="{Binding Settins}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border>
+                                <Button
+                                    Command="{Binding ActiveCommand}"
+                                    HorizontalAlignment="Stretch"
+                                    Background="Transparent"
+                                    BorderThickness="0">
+                                    <DockPanel LastChildFill="True">
+                                        <i:Icon Value="{Binding Icon}" DockPanel.Dock="Left" />
+                                        <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Text="{Binding DisplayName}"></TextBlock>
+                                    </DockPanel>
+                                </Button>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
         </Border>
         <ContentControl Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" s:View.Model="{Binding ActiveItem}" />
     </Grid>

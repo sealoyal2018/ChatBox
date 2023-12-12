@@ -1,15 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using ChatBox.Models;
-using ChatGPT.Net;
-using ChatGPT.Net.DTO.ChatGPT;
 using Stylet;
 using Stylet.Avalonia.Primitive;
 using OpenAI;
 using OpenAI.Managers;
 using OpenAI.ObjectModels.RequestModels;
-using OpenAI.ObjectModels;
 
 namespace ChatBox.ViewModels;
 public class ChatViewModel : Screen
@@ -50,6 +46,7 @@ public class ChatViewModel : Screen
         {
             NotifyOfPropertyChange(nameof(VisibleChat));
         };
+        DisplayName = "新的对话";
     }
 
     public async Task SendMessage()
@@ -70,6 +67,7 @@ public class ChatViewModel : Screen
             {
                 ApiKey = apiKey,
                 BaseDomain = baseUrl,
+                ProviderType = ProviderType.Azure
             });
         }
         if(Chats.Count < 1)

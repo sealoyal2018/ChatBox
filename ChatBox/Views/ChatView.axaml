@@ -7,13 +7,15 @@
     xmlns:m="using:ChatBox.Models"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:md="clr-namespace:Markdown.Avalonia;assembly=Markdown.Avalonia"
+    xmlns:svg="clr-namespace:Avalonia.Svg;assembly=Avalonia.Svg"
+    xmlns:i="https://github.com/projektanker/icons.avalonia"
     xmlns:s="using:Stylet.Xaml"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
 
-    <Grid RowDefinitions="*,auto">
-        <ScrollViewer IsVisible="{Binding VisibleChat}">
+    <Grid RowDefinitions="auto, *,auto">
+        <ScrollViewer Grid.Row="1" IsVisible="{Binding VisibleChat}">
             <ItemsControl
                 Padding="12,8"
                 ItemsSource="{Binding Chats}"
@@ -52,26 +54,31 @@
             </ItemsControl>
         </ScrollViewer>
 
-        <TextBlock
-            Margin="0,50,0,0"
-            HorizontalAlignment="Center"
-            IsVisible="{Binding !VisibleChat}"
-            Text="开始提问吧～" />
+        <TextBlock Grid.Row="1"
+                   Margin="0,50,0,0"
+                   HorizontalAlignment="Center"
+                   IsVisible="{Binding !VisibleChat}"
+                   Text="开始提问吧～" />
 
-        <Border Grid.Row="1" Padding="10">
+        <Border Grid.Row="2" Padding="10">
             <Grid MaxHeight="200" ColumnDefinitions="*,auto">
                 <TextBox
                     AcceptsReturn="True"
                     AcceptsTab="True"
                     BorderThickness="1"
                     Text="{Binding Question}" />
+                
                 <Button
                     Grid.Column="1"
-                    Width="100"
+                    Width="60"
                     VerticalAlignment="Bottom"
                     HorizontalContentAlignment="Center"
+                    Height="35"
+                    CornerRadius="4"
+                    Background="#1d93ab"
                     Click="{s:Action SendMessage}">
-                    发送
+                    <i:Icon Foreground="White" Value="fa-solid fa-paper-plane"></i:Icon>
+                    <!-- <Image Source="/Assets/send.png"></Image> -->
                 </Button>
             </Grid>
         </Border>

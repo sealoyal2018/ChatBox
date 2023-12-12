@@ -6,8 +6,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:s="using:Stylet.Xaml"
     Title="ChatBox"
-    Width="1200"
-    Height="700"
+    Width="1000"
+    Height="600"
     Icon="avares://ChatBox/Assets/logo.png"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
