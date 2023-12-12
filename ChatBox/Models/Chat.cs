@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -7,7 +8,7 @@ using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
-
+using OpenAI.ObjectModels.SharedModels;
 using Stylet;
 using Stylet.Avalonia;
 
@@ -27,5 +28,5 @@ public abstract class Chat : PropertyChangedBase
     }
 }
 
-public record ChatReceiveMessage(string Id, string Body);
+public record ChatReceiveMessage(string Id, List<ChatChoiceResponse> Body);
 

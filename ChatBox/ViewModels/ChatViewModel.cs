@@ -1,15 +1,15 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
-using ChatBox.Components;
 using ChatBox.Models;
 using ChatGPT.Net;
 using ChatGPT.Net.DTO.ChatGPT;
-using OpenAI_API;
-using OpenAI_API.Models;
 using Stylet;
 using Stylet.Avalonia.Primitive;
+using OpenAI;
+using OpenAI.Managers;
+using OpenAI.ObjectModels.RequestModels;
+using OpenAI.ObjectModels;
 
 namespace ChatBox.ViewModels;
 public class ChatViewModel : Screen
@@ -20,7 +20,7 @@ public class ChatViewModel : Screen
     private readonly BindableCollection<Chat> _chats;
     private string title;
     private string question = "写一段入门级的C#代码";
-    private ChatGpt? bot;
+    private OpenAIService? _openAiService;
     
 
     public string Title
@@ -62,13 +62,14 @@ public class ChatViewModel : Screen
 
         if (string.IsNullOrWhiteSpace(Question))
             return;
-        if (bot is null)
+        if (_openAiService is null)
         {
             var apiKey = _chatSettingViewModel.Key;
             var baseUrl = _chatSettingViewModel.BaseUrl;
-            bot = new ChatGpt(apiKey, new ChatGptOptions
+            _openAiService = new OpenAIService(new OpenAiOptions
             {
-                BaseUrl = baseUrl
+                ApiKey = apiKey,
+                BaseDomain = baseUrl,
             });
         }
         if(Chats.Count < 1)
@@ -80,19 +81,29 @@ public class ChatViewModel : Screen
         }
         var questionChat = new UserChat(question);
         var newResponseChat = new BotChat();
-        Execute.PostToUIThread(() => Chats.Add(questionChat));
+        Chats.Add(questionChat);
         Question = string.Empty;
         await Task.Delay(100);
         Chats.Add(newResponseChat);
+        
+        var request = new ChatCompletionCreateRequest
+        {
+            Messages = new List<ChatMessage>
+            {
+                ChatMessage.FromUser("帮我一写一段c#入门级的代码！")
+            },
+            Model = OpenAI.ObjectModels.Models.Gpt_3_5_Turbo,
+        };
+
         _ = Task.Run(async () =>
         {
-            // var message = await bot.Ask(questionChat.Body);
-            await bot.AskStream(
-                    (message)=>this.eventAggregator.PublishOnUIThread(new ChatReceiveMessage(newResponseChat.Id, message)),
-                    questionChat.Body
-                    )
-            ;
+            await foreach (var response in _openAiService.CreateCompletionAsStream(request))
+            {
+                if (response.Successful)
+                {
+                    this.eventAggregator.PublishOnUIThread(new ChatReceiveMessage(newResponseChat.Id, response.Choices));
+                }
+            }
         });
-        return;
     }
 }

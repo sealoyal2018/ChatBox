@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ public class BotChat : Chat, IHandle<ChatReceiveMessage>
 {
     // private StringBuilder bodyBuilder = new StringBuilder();
     private readonly string token = Guid.NewGuid().ToString("N");
-    private String bodyBuilder = String.Empty;
+    private StringBuilder bodyBuilder = new();
     public override Dock Dock => Dock.Left;
 
     public override HorizontalAlignment HorizontalAlignment => HorizontalAlignment.Left;
@@ -43,8 +44,7 @@ public class BotChat : Chat, IHandle<ChatReceiveMessage>
             Monitor.Enter(this);
             try
             {
-                Thread.Sleep(100);
-                bodyBuilder += message.Body;
+                bodyBuilder.Append(string.Join("",message.Body.Select(v => v.Message.Content)));
                 NotifyOfPropertyChange(nameof(Body));
             }
             finally
