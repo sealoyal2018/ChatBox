@@ -58,6 +58,11 @@ public class ChatViewModel : Screen
             var baseUrl = _chatSettingViewModel.BaseUrl;
             var providerType = _chatSettingViewModel.ApiProvider;
             var deploymentId = _chatSettingViewModel.DeploymentId;
+            if(providerType == ProviderType.Azure && string.IsNullOrWhiteSpace(deploymentId))
+            {
+                await _windowManager.ShowMessageBox<bool>("部署Id不能为空", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             _openAiService = new OpenAIService(new OpenAiOptions
             {
                 ApiKey = apiKey,
@@ -86,7 +91,7 @@ public class ChatViewModel : Screen
             {
                 ChatMessage.FromUser(questionChat.Body)
             },
-            Model = OpenAI.ObjectModels.Models.Gpt_3_5_Turbo_1106,
+            Model = _chatSettingViewModel.AiType,
         };
 
         _ = Task.Run(async () =>
