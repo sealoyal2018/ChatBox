@@ -15,17 +15,21 @@
                 BorderBrush="LightGray"
                 Grid.Row="0"
                 Grid.Column="0"
-                Background="#e7f8ff"
                 BorderThickness="0,0,1,0">
             <Grid RowDefinitions="auto,*,auto">
                 <Button
                     HorizontalAlignment="Stretch"
                     HorizontalContentAlignment="Center"
                     Height="35"
+                    BorderBrush="LightGray"
+                    Background="Transparent"
                     Click="{s:Action NewChat}"
                     VerticalContentAlignment="Center"
                     CornerRadius="8">
-                    新话题
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <i:Icon Value="fa-solid fa-plus" VerticalAlignment="Center"></i:Icon>
+                        <TextBlock Text="新话题" VerticalAlignment="Center"></TextBlock>
+                    </StackPanel>
                 </Button>
 
                 <ScrollViewer Grid.Row="1" Margin="0,12,0,0">
@@ -73,7 +77,9 @@
                                     BorderThickness="0">
                                     <DockPanel LastChildFill="True">
                                         <i:Icon Value="{Binding Icon}" DockPanel.Dock="Left" />
-                                        <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Text="{Binding DisplayName}"></TextBlock>
+                                        <TextBlock Margin="8,0,0,0" VerticalAlignment="Center"
+                                                   Text="{Binding DisplayName}">
+                                        </TextBlock>
                                     </DockPanel>
                                 </Button>
                             </Border>

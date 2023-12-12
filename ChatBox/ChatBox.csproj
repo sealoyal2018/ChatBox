@@ -12,6 +12,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Assets\fonts\LXGWWenKai.ttf" />
 	  <None Remove="Assets\logo.png" />
 	  <None Remove="Assets\openai.png" />
 	</ItemGroup>

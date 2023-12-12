@@ -86,7 +86,7 @@ public class ChatViewModel : Screen
             {
                 ChatMessage.FromUser(questionChat.Body)
             },
-            Model = OpenAI.ObjectModels.Models.Gpt_3_5_Turbo,
+            Model = OpenAI.ObjectModels.Models.Gpt_3_5_Turbo_1106,
         };
 
         _ = Task.Run(async () =>

@@ -21,5 +21,6 @@ public partial class App : ChatBoxApplication
         services.AddTransient<ChatViewModel>();
         services.AddSingleton<ISetting, OpenAiSetting>();
         services.AddSingleton<ISetting, CleanRecordSetting>();
+        services.AddSingleton<ISetting, AboutSetting>();
     }
 }
