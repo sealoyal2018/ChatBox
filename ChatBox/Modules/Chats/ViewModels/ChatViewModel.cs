@@ -102,6 +102,14 @@ public class ChatViewModel : Screen
                 {
                     this.eventAggregator.PublishOnUIThread(new ChatReceiveMessage(newResponseChat.Id, response.Choices));
                 }
+                else
+                {
+                    await Execute.PostToUIThreadAsync(async () =>
+                    {
+                        await _windowManager.ShowMessageBox<bool>(response.Error.Message, "错误", MessageBoxButton.OK,
+                            MessageBoxImage.Error);
+                    });
+                }
             }
         });
     }
