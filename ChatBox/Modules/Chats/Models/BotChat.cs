@@ -1,20 +1,16 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-
 using Avalonia.Controls;
 using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
-
 using Stylet;
 using Stylet.Avalonia;
 
-namespace ChatBox.Models;
+namespace ChatBox.Modules.Chats.Models;
 public class BotChat : Chat, IHandle<ChatReceiveMessage>
 {
     // private StringBuilder bodyBuilder = new StringBuilder();

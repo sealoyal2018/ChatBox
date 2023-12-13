@@ -4,7 +4,7 @@ using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 
-namespace ChatBox.Models;
+namespace ChatBox.Modules.Chats.Models;
 public class UserChat: Chat
 {
     public override Dock Dock => Dock.Right;

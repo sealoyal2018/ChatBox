@@ -1,18 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-
 using Avalonia.Controls;
 using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
-using Avalonia.Platform;
 using OpenAI.ObjectModels.SharedModels;
 using Stylet;
-using Stylet.Avalonia;
 
-namespace ChatBox.Models;
+namespace ChatBox.Modules.Chats.Models;
 public abstract class Chat : PropertyChangedBase
 {
     public abstract Dock Dock { get; }

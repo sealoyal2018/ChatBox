@@ -1,21 +1,18 @@
 using System;
 using System.IO;
-using System.Net.Http.Json;
+using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
-
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Platform;
-using Stylet;
-using Stylet.Avalonia;
-using System.Diagnostics;
 using Markdig;
-using System.Linq;
 using Markdig.Syntax;
+using Stylet;
 
-namespace ChatBox.Components;
+namespace ChatBox.Modules.Chats.Components;
 
 public partial class Markdown : UserControl
 {
@@ -43,7 +40,7 @@ public partial class Markdown : UserControl
 
     static Markdown()
     {
-        TextProperty = AvaloniaProperty.Register<ChatBox.Components.Markdown, string>("Text", string.Empty);
+        TextProperty = AvaloniaProperty.Register<Markdown, string>("Text", string.Empty);
         TextProperty.Changed.Subscribe(e =>
         {
             var markdown = e.Sender as Markdown;

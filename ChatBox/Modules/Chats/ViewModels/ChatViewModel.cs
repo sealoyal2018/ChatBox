@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using ChatBox.Models;
-using Stylet;
-using Stylet.Avalonia.Primitive;
+using ChatBox.Modules.Chats.Models;
 using OpenAI;
 using OpenAI.Managers;
 using OpenAI.ObjectModels.RequestModels;
-using OpenAI.Interfaces;
+using Stylet;
+using Stylet.Avalonia.Primitive;
 
-namespace ChatBox.ViewModels;
+namespace ChatBox.Modules.Chats.ViewModels;
 public class ChatViewModel : Screen
 {
     private readonly ChatSettingViewModel _chatSettingViewModel;

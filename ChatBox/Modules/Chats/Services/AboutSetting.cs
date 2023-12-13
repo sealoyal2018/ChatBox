@@ -1,10 +1,9 @@
 ﻿using System.Windows.Input;
 using ChatBox.Interfaces;
-using Stylet.Xaml;
 
-namespace ChatBox.Services;
+namespace ChatBox.Modules.Chats.Services;
 
-public class AboutSetting : ISetting
+public class AboutSetting : IChatSetting
 {
     public string DisplayName => "关于(v0.0.10)";
     public string Icon => "fa-solid fa-circle-info";

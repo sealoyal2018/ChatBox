@@ -1,12 +1,11 @@
 ﻿using System.Windows.Input;
 using ChatBox.Interfaces;
 using ChatBox.ViewModels;
-using Stylet;
 using Stylet.Avalonia;
 
-namespace ChatBox.Services;
+namespace ChatBox.Modules.Chats.Services;
 
-public class CleanRecordSetting : ISetting
+public class CleanRecordSetting : IChatSetting
 {
     public string DisplayName => "清空会话";
     public string Icon => "fa-solid fa-trash";

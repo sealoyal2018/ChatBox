@@ -4,19 +4,19 @@ using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Input;
 using ChatBox.Interfaces;
-using ChatBox.Models;
+using ChatBox.Modules.Chats.ViewModels;
 using Stylet;
 using Stylet.Avalonia;
 
 namespace ChatBox.ViewModels;
 public class ShellViewModel : Conductor<ChatViewModel>
 {
-    public List<ISetting> Settins { get; }
+    public List<IChatSetting> Settins { get; }
     private readonly BindableCollection<ChatViewModel> chatGroups;
 
     public BindableCollection<ChatViewModel> ChatGroups => chatGroups;
 
-    public ShellViewModel(ChatViewModel chatViewModel,IEnumerable<ISetting> settins)
+    public ShellViewModel(ChatViewModel chatViewModel,IEnumerable<IChatSetting> settins)
     {
         Settins = settins.OrderBy(v=> v.Sort).ToList();
         chatGroups = new BindableCollection<ChatViewModel>

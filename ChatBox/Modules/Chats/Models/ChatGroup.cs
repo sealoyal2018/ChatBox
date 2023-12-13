@@ -1,6 +1,6 @@
 ﻿using Stylet;
 
-namespace ChatBox.Models;
+namespace ChatBox.Modules.Chats.Models;
 
 public class ChatGroup : PropertyChangedBase
 {

@@ -2,7 +2,7 @@
 
 namespace ChatBox.Interfaces;
 
-public interface ISetting
+public interface IChatSetting
 {
     string DisplayName { get; }
     string Icon { get; }

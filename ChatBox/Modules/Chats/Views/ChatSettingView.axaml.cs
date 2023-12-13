@@ -1,8 +1,6 @@
-﻿using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
+﻿using Avalonia.Controls;
 
-namespace ChatBox.Views;
+namespace ChatBox.Modules.Chats.Views;
 
 public partial class ChatSettingView : Window
 {

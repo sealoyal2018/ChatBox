@@ -40,4 +40,29 @@
       <HintPath>C:\Users\Admin\.nuget\packages\avalonia.svg\11.0.0.7\lib\net8.0\Avalonia.Svg.dll</HintPath>
     </Reference>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Components\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="Models\" />
+    <Folder Include="Modules\Paints\Interfaces\" />
+    <Folder Include="Modules\Paints\Models\" />
+    <Folder Include="Modules\Paints\Services\" />
+    <Folder Include="Modules\Paints\ViewModels\" />
+    <Folder Include="Modules\Paints\Views\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Modules\Chats\Views\ChatSettingView.axaml.cs">
+      <DependentUpon>ChatSettingView.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Modules\Chats\Views\ChatView.axaml.cs">
+      <DependentUpon>ChatView.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Modules\Chats\Components\Markdown.axaml.cs">
+      <DependentUpon>Markdown.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
 </Project>

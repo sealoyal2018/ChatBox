@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using ChatBox.Models;
 using OpenAI;
 using Stylet;
 
-namespace ChatBox.ViewModels;
+namespace ChatBox.Modules.Chats.ViewModels;
 
 public class ChatSettingViewModel: PropertyChangedBase
 {

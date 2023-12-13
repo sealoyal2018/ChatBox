@@ -1,12 +1,12 @@
 ﻿using System.Windows.Input;
 using ChatBox.Interfaces;
-using ChatBox.ViewModels;
+using ChatBox.Modules.Chats.ViewModels;
 using Stylet;
 using Stylet.Avalonia;
 
-namespace ChatBox.Services;
+namespace ChatBox.Modules.Chats.Services;
 
-public class OpenAiSetting : ISetting
+public class OpenAiSetting : IChatSetting
 {
     public string DisplayName => "设置";
     public string Icon => "fa-solid fa-gear";
