@@ -5,6 +5,7 @@
              xmlns:mdxaml="https://github.com/whistyun/Markdown.Avalonia"
              xmlns:local="using:ChatBox.Components"
              xmlns:m="using:ChatBox.Models"
+             xmlns:cvt="using:ChatBox.Converters"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="ChatBox.Components.ChatMessage">
     <UserControl.DataTemplates>
@@ -49,7 +50,7 @@
                     </Border>
                 </DockPanel>
             </DataTemplate>
-            
+
             <DataTemplate x:Key="ImageBotChat" DataType="m:ImageBotChat">
                 <DockPanel HorizontalAlignment="Stretch" LastChildFill="True">
                     <Image
@@ -65,7 +66,21 @@
                         BorderThickness="1"
                         Padding="8,4"
                         CornerRadius="4,4,4,4">
-                        <Image Source="{Binding Body}"></Image>
+                        <ItemsControl ItemsSource="{Binding Images}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Padding="4" BorderThickness="1" Height="160" Width="160">
+                                        <Image
+                                            Source="{Binding .,Converter={x:Static cvt:UrlToBitmapConverter.Instance}}" />
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
                     </Border>
                 </DockPanel>
             </DataTemplate>

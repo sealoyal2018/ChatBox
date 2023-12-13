@@ -19,5 +19,6 @@ public partial class App : ChatBoxApplication
         services.AddPaints();
         services.AddSingleton<MainViewModel>();
         services.AddSingleton<ShellViewModel>();
+        services.AddHttpClient();
     }
 }
