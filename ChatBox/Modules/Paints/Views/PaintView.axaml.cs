@@ -2,11 +2,11 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace ChatBox.Views;
+namespace ChatBox.Modules.Paints.Views;
 
-public partial class HomeView : UserControl
+public partial class PaintView : UserControl
 {
-    public HomeView()
+    public PaintView()
     {
         InitializeComponent();
     }

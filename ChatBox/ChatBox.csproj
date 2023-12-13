@@ -42,13 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Components\" />
-    <Folder Include="Interfaces\" />
     <Folder Include="Models\" />
     <Folder Include="Modules\Paints\Interfaces\" />
     <Folder Include="Modules\Paints\Models\" />
     <Folder Include="Modules\Paints\Services\" />
-    <Folder Include="Modules\Paints\ViewModels\" />
-    <Folder Include="Modules\Paints\Views\" />
     <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>

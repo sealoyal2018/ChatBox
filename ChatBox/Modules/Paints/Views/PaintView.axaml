@@ -3,7 +3,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="ChatBox.Views.HomeView">
-
-    <TextBlock Text="开始提问吧～" VerticalAlignment="Center" Margin="0,50,0,0"></TextBlock>
+             x:Class="ChatBox.Modules.Paints.Views.PaintView">
+    Welcome to Avalonia!
 </UserControl>

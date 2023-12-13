@@ -9,55 +9,22 @@ using Stylet;
 using Stylet.Avalonia;
 
 namespace ChatBox.ViewModels;
-public class ShellViewModel : Conductor<ChatViewModel>
+public class ShellViewModel : Conductor<IAppModule>
 {
-    public List<IChatSetting> Settins { get; }
-    private readonly BindableCollection<ChatViewModel> chatGroups;
+    private int currentModuleIndex;
+    public List<IAppModule> AppModules { get; }
 
-    public BindableCollection<ChatViewModel> ChatGroups => chatGroups;
-
-    public ShellViewModel(ChatViewModel chatViewModel,IEnumerable<IChatSetting> settins)
+    public int CurrentModuleIndex
     {
-        Settins = settins.OrderBy(v=> v.Sort).ToList();
-        chatGroups = new BindableCollection<ChatViewModel>
-        {
-            chatViewModel
-        };
-
-        ActiveItem = chatViewModel;
-    }
-
-    public void NewChat()
-    {
-        var newChat = IoC.Get<ChatViewModel>();
-        ChatGroups.Add(newChat);
-        ActivateItem(newChat);
+        get => currentModuleIndex;
+        set => SetAndNotify(ref currentModuleIndex, value);
     }
     
-    public void EditChat(PointerReleasedEventArgs e)
+    public ShellViewModel(IEnumerable<IAppModule> appModules)
     {
-        if (e.Pointer.IsPrimary && e.Source is Image i && i.DataContext is ChatViewModel group)
-        {
-            e.Handled = true;
-        }
-    }
-
-    public void DeleteChat(PointerReleasedEventArgs e)
-    {
-        if (e.Pointer.IsPrimary && e.Source is Image i && i.DataContext is ChatViewModel group)
-        {
-            ChatGroups.Remove(group);
-            NewChat();
-            e.Handled = true;
-        }
+        AppModules = appModules.OrderBy(v=> v.Sort).ToList();
+        CurrentModuleIndex = 0;
+        ActiveItem = AppModules.First();
     }
     
-    public void SelectChat(PointerReleasedEventArgs e)
-    {
-        if (e.Pointer.IsPrimary && e.Source is Border { DataContext: ChatViewModel group } && group != ActiveItem)
-        {
-            ActiveItem = group;
-            e.Handled = true;
-        }
-    }
 }
