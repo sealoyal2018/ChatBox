@@ -6,10 +6,23 @@
 </p>
 </html>
 
+> MVVM 框架: [Stylet](https://github.com/sealoyal2018/Stylet.Avalonia)
 
 
-<img src="./images/preview.png" alt="preview.png" width="100%">
 
+<img src="./images/common.gif" alt="preview.png" width="100%">
+
+
+
+### 对话
+
+![chat](./images/chat.png)
+
+
+
+### 文生图
+
+![Paint](./images/paint.png)
 
 
 
