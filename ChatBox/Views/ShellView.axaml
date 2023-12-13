@@ -17,6 +17,14 @@
                 BorderThickness="0,0,1,0">
             <Grid RowDefinitions="*,auto">
                 <ItemsControl Grid.Row="0" ItemsSource="{Binding AppModules}">
+                    <ItemsControl.Styles>
+                        <Style Selector="Border.selected">
+                            <Setter Property="Background" Value="Brown" />
+                        </Style>
+                        <Style Selector="Border:pointerover">
+                            <Setter Property="Background" Value="Linen" />
+                        </Style>
+                    </ItemsControl.Styles>
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Spacing="12" />
@@ -24,11 +32,11 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border Background="Transparent">
+                            <Border PointerReleased="{s:Action OpenModule}" Background="Transparent" Classes.selected="{Binding IsActive}">
                                 <DockPanel HorizontalAlignment="Center" LastChildFill="True">
                                     <i:Icon Value="{Binding Icon}" DockPanel.Dock="Top" />
                                     <TextBlock Margin="0,8,0,0" VerticalAlignment="Center"
-                                               Text="{Binding DisplayName}">
+                                               Text="{Binding IsActive}">
                                     </TextBlock>
                                 </DockPanel>
                             </Border>

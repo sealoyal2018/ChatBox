@@ -1,17 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Input;
 using ChatBox.Interfaces;
-using ChatBox.Modules.Chats.ViewModels;
 using Stylet;
-using Stylet.Avalonia;
 
 namespace ChatBox.ViewModels;
-public class ShellViewModel : Conductor<IAppModule>
+public class ShellViewModel : Conductor<IAppModule>.Collection.OneActive
 {
-    private int currentModuleIndex;
+    private int currentModuleIndex = 0;
     public List<IAppModule> AppModules { get; }
 
     public int CurrentModuleIndex
@@ -23,8 +20,18 @@ public class ShellViewModel : Conductor<IAppModule>
     public ShellViewModel(IEnumerable<IAppModule> appModules)
     {
         AppModules = appModules.OrderBy(v=> v.Sort).ToList();
-        CurrentModuleIndex = 0;
-        ActiveItem = AppModules.First();
+        CurrentModuleIndex = 1;
+        var currentModule = AppModules[CurrentModuleIndex];
+        ActiveItem = currentModule;
+    }
+
+    public void OpenModule(PointerReleasedEventArgs e)
+    {
+        if (e.Pointer.IsPrimary && e.Source is Border { DataContext: IAppModule module } && ActiveItem != module)
+        {
+            ActivateItem(module);
+            e.Handled = true;
+        }
     }
     
 }

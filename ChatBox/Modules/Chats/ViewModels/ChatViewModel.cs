@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using ChatBox.Modules.Chats.Models;
+using ChatBox.Models;
 using OpenAI;
 using OpenAI.Managers;
 using OpenAI.ObjectModels.RequestModels;
+using OpenAI.ObjectModels.SharedModels;
 using Stylet;
 using Stylet.Avalonia.Primitive;
 
@@ -79,7 +80,7 @@ public class ChatViewModel : Screen
                 DisplayName = Question[..6];
         }
         var questionChat = new UserChat(Question);
-        var newResponseChat = new BotChat();
+        var newResponseChat = new TextBotChat();
         Chats.Add(questionChat);
         Question = string.Empty;
         await Task.Delay(100);
@@ -100,7 +101,7 @@ public class ChatViewModel : Screen
             {
                 if (response.Successful)
                 {
-                    this.eventAggregator.PublishOnUIThread(new ChatReceiveMessage(newResponseChat.Id, response.Choices));
+                    this.eventAggregator.PublishOnUIThread(new ChatReceiveMessage<List<ChatChoiceResponse>>(newResponseChat.Id, response.Choices));
                 }
                 else
                 {

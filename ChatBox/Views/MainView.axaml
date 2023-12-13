@@ -10,6 +10,8 @@
     Height="600"
     Icon="avares://ChatBox/Assets/logo.png"
     WindowStartupLocation="CenterScreen"
+    ExtendClientAreaChromeHints="PreferSystemChrome"
+    ExtendClientAreaToDecorationsHint="True"
     mc:Ignorable="d">
     <ContentControl s:View.Model="{Binding ShellViewModel}" />
 </Window>

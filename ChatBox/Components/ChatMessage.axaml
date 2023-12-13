@@ -1,0 +1,86 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mdxaml="https://github.com/whistyun/Markdown.Avalonia"
+             xmlns:local="using:ChatBox.Components"
+             xmlns:m="using:ChatBox.Models"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="ChatBox.Components.ChatMessage">
+    <UserControl.DataTemplates>
+        <local:ChatTemplateSelector>
+            <DataTemplate x:Key="UserChat" DataType="m:UserChat">
+                <DockPanel HorizontalAlignment="Stretch" LastChildFill="True">
+                    <Image
+                        Width="32"
+                        Height="32"
+                        VerticalAlignment="Top"
+                        DockPanel.Dock="Right"
+                        Source="{Binding Avatar}" />
+                    <Border
+                        MaxWidth="500"
+                        HorizontalAlignment="Right"
+                        Background="#d2f9d1"
+                        BorderThickness="1"
+                        Padding="8,4"
+                        CornerRadius="4,4,4,4">
+                        <mdxaml:MarkdownScrollViewer
+                            Markdown="{Binding Body}" />
+                    </Border>
+                </DockPanel>
+            </DataTemplate>
+            <DataTemplate x:Key="TextBotChat" DataType="m:TextBotChat">
+                <DockPanel HorizontalAlignment="Stretch" LastChildFill="True">
+                    <Image
+                        Width="32"
+                        Height="32"
+                        VerticalAlignment="Top"
+                        DockPanel.Dock="Left"
+                        Source="{Binding Avatar}" />
+                    <Border
+                        MaxWidth="500"
+                        HorizontalAlignment="Left"
+                        Background="#f4f6f8"
+                        BorderThickness="1"
+                        Padding="8,4"
+                        CornerRadius="4,4,4,4">
+                        <mdxaml:MarkdownScrollViewer
+                            Markdown="{Binding Body}" />
+                    </Border>
+                </DockPanel>
+            </DataTemplate>
+            
+            <DataTemplate x:Key="ImageBotChat" DataType="m:ImageBotChat">
+                <DockPanel HorizontalAlignment="Stretch" LastChildFill="True">
+                    <Image
+                        Width="32"
+                        Height="32"
+                        VerticalAlignment="Top"
+                        DockPanel.Dock="Left"
+                        Source="{Binding Avatar}" />
+                    <Border
+                        MaxWidth="500"
+                        HorizontalAlignment="Left"
+                        Background="#f4f6f8"
+                        BorderThickness="1"
+                        Padding="8,4"
+                        CornerRadius="4,4,4,4">
+                        <Image Source="{Binding Body}"></Image>
+                    </Border>
+                </DockPanel>
+            </DataTemplate>
+
+        </local:ChatTemplateSelector>
+    </UserControl.DataTemplates>
+
+    <ItemsControl
+        Padding="12,8"
+        ItemsSource="{Binding Chats}"
+        ScrollViewer.VerticalScrollBarVisibility="Auto">
+        <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+                <StackPanel HorizontalAlignment="Stretch" Spacing="8" />
+            </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+    </ItemsControl>
+</UserControl>

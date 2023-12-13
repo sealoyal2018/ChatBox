@@ -1,39 +1,30 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using Avalonia.Controls;
-using Avalonia.Layout;
-using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
+using OpenAI.ObjectModels.SharedModels;
 using Stylet;
 using Stylet.Avalonia;
 
-namespace ChatBox.Modules.Chats.Models;
-public class BotChat : Chat, IHandle<ChatReceiveMessage>
+namespace ChatBox.Models;
+public class TextBotChat : Chat, IHandle<ChatReceiveMessage<List<ChatChoiceResponse>>>
 {
-    // private StringBuilder bodyBuilder = new StringBuilder();
-    private readonly string token = Guid.NewGuid().ToString("N");
     private StringBuilder bodyBuilder = new();
-    public override Dock Dock => Dock.Left;
-
-    public override HorizontalAlignment HorizontalAlignment => HorizontalAlignment.Left;
-
-    public override Brush Background => new SolidColorBrush(Color.Parse("#f4f6f8"));
 
     public override Bitmap Avatar => new Bitmap(AssetLoader.Open(new System.Uri("avares://ChatBox/Assets/openai.png")));
 
 
     public override string Body => bodyBuilder.ToString();
 
-    public BotChat()
+    public TextBotChat()
     {
         var eventAggregator = IoC.Get<IEventAggregator>();
         eventAggregator.Subscribe(this);
     }
 
-    public void Handle(ChatReceiveMessage message)
+    public void Handle(ChatReceiveMessage<List<ChatChoiceResponse>> message)
     {
         if (message.Id == this.Id)
         {

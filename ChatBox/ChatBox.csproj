@@ -41,10 +41,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Components\" />
-    <Folder Include="Models\" />
+    <Folder Include="Modules\Chats\Components\" />
     <Folder Include="Modules\Paints\Interfaces\" />
-    <Folder Include="Modules\Paints\Models\" />
     <Folder Include="Modules\Paints\Services\" />
     <Folder Include="Services\" />
   </ItemGroup>
@@ -57,7 +55,7 @@
       <DependentUpon>ChatView.axaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Modules\Chats\Components\Markdown.axaml.cs">
+    <Compile Update="Components\Markdown.axaml.cs">
       <DependentUpon>Markdown.axaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
