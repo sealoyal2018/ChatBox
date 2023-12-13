@@ -91,8 +91,7 @@ public class ChatViewModel : Screen
             {
                 ChatMessage.FromUser(questionChat.Body)
             },
-            //Model = _chatSettingViewModel.AiType,
-            Model = OpenAI.ObjectModels.Models.Dall_e_3,
+            Model = _chatSettingViewModel.AiType,
         };
 
         _ = Task.Run(async () =>

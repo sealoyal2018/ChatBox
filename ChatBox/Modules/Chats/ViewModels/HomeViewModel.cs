@@ -49,7 +49,8 @@ public class HomeViewModel  : Conductor<ChatViewModel>, IAppModule
         if (e.Pointer.IsPrimary && e.Source is Image i && i.DataContext is ChatViewModel group)
         {
             ChatGroups.Remove(group);
-            NewChat();
+            if(ChatGroups.Count < 1)
+                NewChat();
             e.Handled = true;
         }
     }

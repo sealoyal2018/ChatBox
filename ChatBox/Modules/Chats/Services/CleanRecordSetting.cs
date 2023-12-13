@@ -1,4 +1,6 @@
-﻿using System.Windows.Input;
+﻿using System.Diagnostics;
+using System.Linq;
+using System.Windows.Input;
 using ChatBox.Interfaces;
 using ChatBox.Modules.Chats.ViewModels;
 using Stylet.Avalonia;
@@ -19,14 +21,18 @@ public class CleanRecordSetting : IChatSetting
 
     private void Execute()
     {
-        var homeViewModel = IoC.Get<HomeViewModel>();
+        var homeViewModel = IoC.GetAll<IAppModule>().OfType<HomeViewModel>().FirstOrDefault();
+        Debug.Assert(homeViewModel != null);
+        // var homeViewModel = IoC.Get<HomeViewModel>();
         homeViewModel.ChatGroups.Clear();
         homeViewModel.NewChat();
     }
 
     private bool CanExecute()
     {
-        var homeViewModel = IoC.Get<HomeViewModel>();
+        var homeViewModel = IoC.GetAll<IAppModule>().OfType<HomeViewModel>().FirstOrDefault();
+        if (homeViewModel is null)
+            return false;
         return homeViewModel.ChatGroups.Count > 0;
     }
 }

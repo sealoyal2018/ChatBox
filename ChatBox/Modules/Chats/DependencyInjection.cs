@@ -15,7 +15,6 @@ public static class DependencyInjection
         services.AddSingleton<IChatSetting, CleanRecordSetting>();
         services.AddSingleton<IChatSetting, AboutSetting>();
         services.AddSingleton<IChatSetting, PromptSetting>();
-        services.AddSingleton<HomeViewModel>();
         services.AddSingleton<IAppModule, HomeViewModel>();
         return services;
     }
