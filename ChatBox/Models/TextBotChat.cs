@@ -18,6 +18,7 @@ public class TextBotChat : Chat, IHandle<ChatReceiveMessage<List<ChatChoiceRespo
 {
     private StringBuilder bodyBuilder = new();
     private bool disposedValue;
+    private readonly IEventAggregator eventAggregator;
 
     public override Bitmap Avatar => new Bitmap(AssetLoader.Open(new System.Uri("avares://ChatBox/Assets/openai.png")));
 
@@ -26,14 +27,8 @@ public class TextBotChat : Chat, IHandle<ChatReceiveMessage<List<ChatChoiceRespo
 
     public TextBotChat()
     {
-        Application.Current.ActualThemeVariantChanged += Current_ActualThemeVariantChanged;
-        var eventAggregator = IoC.Get<IEventAggregator>();
+        this.eventAggregator = IoC.Get<IEventAggregator>();
         eventAggregator.Subscribe(this);
-    }
-
-    private void Current_ActualThemeVariantChanged(object? sender, EventArgs e)
-    {
-        throw new NotImplementedException();
     }
 
     public void Handle(ChatReceiveMessage<List<ChatChoiceResponse>> message)
@@ -65,7 +60,7 @@ public class TextBotChat : Chat, IHandle<ChatReceiveMessage<List<ChatChoiceRespo
         {
             if (disposing)
             {
-                // TODO: 释放托管状态(托管对象)
+                this.eventAggregator.Unsubscribe(this);
             }
 
             // TODO: 释放未托管的资源(未托管的对象)并重写终结器

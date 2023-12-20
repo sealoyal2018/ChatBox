@@ -44,6 +44,7 @@
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
+                <Button Grid.Row="1" i:Attached.Icon="fa-solid fa-circle-half-stroke" Click="{s:Action ChangeTheme}" />
             </Grid>
         </Border>
         <ContentControl Grid.Column="1" s:View.Model="{Binding ActiveItem}" />

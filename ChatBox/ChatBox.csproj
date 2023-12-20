@@ -19,7 +19,6 @@
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="11.0.6" />
     <PackageReference Include="Avalonia.Desktop" Version="11.0.6" />
-    <PackageReference Include="Avalonia.HtmlRenderer" Version="11.0.0" />
     <PackageReference Include="Avalonia.Svg.Skia" Version="11.0.0.7" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.6" />
     <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.6" />
@@ -53,10 +52,6 @@
     </Compile>
     <Compile Update="Modules\Chats\Views\ChatView.axaml.cs">
       <DependentUpon>ChatView.axaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Components\Markdown.axaml.cs">
-      <DependentUpon>Markdown.axaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

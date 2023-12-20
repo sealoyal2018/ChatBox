@@ -1,11 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
+using Avalonia.Styling;
 using ChatBox.Interfaces;
 using Stylet;
 
 namespace ChatBox.ViewModels;
+
 public class ShellViewModel : Conductor<IAppModule>.Collection.OneActive
 {
     private int currentModuleIndex = 0;
@@ -16,10 +19,10 @@ public class ShellViewModel : Conductor<IAppModule>.Collection.OneActive
         get => currentModuleIndex;
         set => SetAndNotify(ref currentModuleIndex, value);
     }
-    
+
     public ShellViewModel(IEnumerable<IAppModule> appModules)
     {
-        AppModules = appModules.OrderBy(v=> v.Sort).ToList();
+        AppModules = appModules.OrderBy(v => v.Sort).ToList();
         CurrentModuleIndex = 1;
         var currentModule = AppModules[CurrentModuleIndex];
         ActiveItem = currentModule;
@@ -33,5 +36,12 @@ public class ShellViewModel : Conductor<IAppModule>.Collection.OneActive
             e.Handled = true;
         }
     }
-    
+
+    public void ChangeTheme()
+    {
+        if (Application.Current.ActualThemeVariant == ThemeVariant.Light)
+            Application.Current.RequestedThemeVariant = ThemeVariant.Dark;
+        else
+            Application.Current.RequestedThemeVariant = ThemeVariant.Light;
+    }
 }
