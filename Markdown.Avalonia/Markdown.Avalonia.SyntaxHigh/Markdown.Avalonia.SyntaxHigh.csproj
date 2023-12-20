@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\Markdown.Avalonia.props" />
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <PackageId>Markdown.Avalonia.SyntaxHigh</PackageId>
+    <Version>11.0.6</Version>
+    <Authors>whistyun</Authors>
+    <Copyright>Copyright (c) 2021 whistyun</Copyright>
+    <PackageProjectUrl>https://github.com/whistyun/Markdown.Avalonia</PackageProjectUrl>
+    <PackageReadmeFile>Markdown.Avalonia.SyntaxHigh.md</PackageReadmeFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Company />
+    <LangVersion>9</LangVersion>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.0.6" />
+    <PackageReference Include="Avalonia.AvaloniaEdit" Version="*" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\Markdown.Avalonia.Tight\Markdown.Avalonia.Tight.csproj" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="StyleCollections\AppendixOfDefaultTheme.axaml.cs">
+      <DependentUpon>AppendixOfDefaultTheme.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="StyleCollections\AppendixOfFluentAvalonia.axaml.cs">
+      <DependentUpon>AppendixOfFluentAvalonia.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="StyleCollections\AppendixOfFluentTheme.axaml.cs">
+      <DependentUpon>AppendixOfFluentTheme.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+</Project>

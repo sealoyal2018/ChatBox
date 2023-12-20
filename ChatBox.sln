@@ -3,7 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatBox", "ChatBox\ChatBox.csproj", "{3DD576D3-B1F6-41D3-BABE-C97F3A266212}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatBox", "ChatBox\ChatBox.csproj", "{3DD576D3-B1F6-41D3-BABE-C97F3A266212}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Markdown.Avalonia", "Markdown.Avalonia", "{B5A04A25-78D2-4391-AEB7-56A211700814}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Markdown.Avalonia", "Markdown.Avalonia\Markdown.Avalonia\Markdown.Avalonia.csproj", "{82B4876D-8D9E-446A-AAC3-B6FA1F94D501}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Markdown.Avalonia.SyntaxHigh", "Markdown.Avalonia\Markdown.Avalonia.SyntaxHigh\Markdown.Avalonia.SyntaxHigh.csproj", "{7FE06476-BE19-4C75-A22D-AF759A4FA50C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Markdown.Avalonia.Html", "Markdown.Avalonia\Markdown.Avalonia.Html\Markdown.Avalonia.Html.csproj", "{161ED4CB-CB12-414D-A0ED-245082167234}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Markdown.Avalonia.Svg", "Markdown.Avalonia\Markdown.Avalonia.Svg\Markdown.Avalonia.Svg.csproj", "{6DE4ED0D-8358-4F01-A843-506859E6EA54}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Markdown.Avalonia.Tight", "Markdown.Avalonia\Markdown.Avalonia.Tight\Markdown.Avalonia.Tight.csproj", "{D483D500-A54D-4A5B-A5AD-81EF9C28D8A9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ColorTextBlock.Avalonia", "Markdown.Avalonia\ColorTextBlock.Avalonia\ColorTextBlock.Avalonia.csproj", "{BC5A0F5F-0C06-4698-B98B-B10D07B53ECD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +29,41 @@ Global
 		{3DD576D3-B1F6-41D3-BABE-C97F3A266212}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3DD576D3-B1F6-41D3-BABE-C97F3A266212}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3DD576D3-B1F6-41D3-BABE-C97F3A266212}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82B4876D-8D9E-446A-AAC3-B6FA1F94D501}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82B4876D-8D9E-446A-AAC3-B6FA1F94D501}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82B4876D-8D9E-446A-AAC3-B6FA1F94D501}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82B4876D-8D9E-446A-AAC3-B6FA1F94D501}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FE06476-BE19-4C75-A22D-AF759A4FA50C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FE06476-BE19-4C75-A22D-AF759A4FA50C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FE06476-BE19-4C75-A22D-AF759A4FA50C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FE06476-BE19-4C75-A22D-AF759A4FA50C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{161ED4CB-CB12-414D-A0ED-245082167234}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{161ED4CB-CB12-414D-A0ED-245082167234}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{161ED4CB-CB12-414D-A0ED-245082167234}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{161ED4CB-CB12-414D-A0ED-245082167234}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DE4ED0D-8358-4F01-A843-506859E6EA54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DE4ED0D-8358-4F01-A843-506859E6EA54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DE4ED0D-8358-4F01-A843-506859E6EA54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DE4ED0D-8358-4F01-A843-506859E6EA54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D483D500-A54D-4A5B-A5AD-81EF9C28D8A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D483D500-A54D-4A5B-A5AD-81EF9C28D8A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D483D500-A54D-4A5B-A5AD-81EF9C28D8A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D483D500-A54D-4A5B-A5AD-81EF9C28D8A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC5A0F5F-0C06-4698-B98B-B10D07B53ECD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC5A0F5F-0C06-4698-B98B-B10D07B53ECD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC5A0F5F-0C06-4698-B98B-B10D07B53ECD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC5A0F5F-0C06-4698-B98B-B10D07B53ECD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{82B4876D-8D9E-446A-AAC3-B6FA1F94D501} = {B5A04A25-78D2-4391-AEB7-56A211700814}
+		{7FE06476-BE19-4C75-A22D-AF759A4FA50C} = {B5A04A25-78D2-4391-AEB7-56A211700814}
+		{161ED4CB-CB12-414D-A0ED-245082167234} = {B5A04A25-78D2-4391-AEB7-56A211700814}
+		{6DE4ED0D-8358-4F01-A843-506859E6EA54} = {B5A04A25-78D2-4391-AEB7-56A211700814}
+		{D483D500-A54D-4A5B-A5AD-81EF9C28D8A9} = {B5A04A25-78D2-4391-AEB7-56A211700814}
+		{BC5A0F5F-0C06-4698-B98B-B10D07B53ECD} = {B5A04A25-78D2-4391-AEB7-56A211700814}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {97C72C71-E872-4053-A796-1EEE9177DBFC}
