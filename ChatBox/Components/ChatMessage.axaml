@@ -1,13 +1,23 @@
-﻿<UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:mdxaml="https://github.com/whistyun/Markdown.Avalonia"
-             xmlns:local="using:ChatBox.Components"
-             xmlns:m="using:ChatBox.Models"
-             xmlns:cvt="using:ChatBox.Converters"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="ChatBox.Components.ChatMessage">
+﻿<UserControl
+    x:Class="ChatBox.Components.ChatMessage"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ctxt="clr-namespace:ColorTextBlock.Avalonia;assembly=ColorTextBlock.Avalonia"
+    xmlns:cvt="using:ChatBox.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:ChatBox.Components"
+    xmlns:m="using:ChatBox.Models"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mdc="clr-namespace:Markdown.Avalonia.Controls;assembly=Markdown.Avalonia"
+    xmlns:mde="clr-namespace:Markdown.Avalonia.Extensions;assembly=Markdown.Avalonia"
+    xmlns:mdxaml="https://github.com/whistyun/Markdown.Avalonia"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <UserControl.Styles>
+        <StyleInclude Source="VueTheme.axaml" />
+    </UserControl.Styles>
+
     <UserControl.DataTemplates>
         <local:ChatTemplateSelector>
             <DataTemplate x:Key="UserChat" DataType="m:UserChat">
@@ -20,13 +30,17 @@
                         Source="{Binding Avatar}" />
                     <Border
                         MaxWidth="500"
-                        HorizontalAlignment="Right"
-                        Background="#d2f9d1"
-                        BorderThickness="1"
                         Padding="8,4"
+                        HorizontalAlignment="Right"
+                        Background="{DynamicResource Markdown.DefaultBackgroundBrush}"
+                        BorderBrush="{DynamicResource Markdown.DefaultBorderBrush}"
+                        BorderThickness="1"
                         CornerRadius="4,4,4,4">
-                        <mdxaml:MarkdownScrollViewer
-                            Markdown="{Binding Body}" />
+                        <mdxaml:MarkdownScrollViewer Markdown="{Binding Body}">
+                            <mdxaml:MarkdownScrollViewer.Styles>
+                                <StyleInclude Source="VueTheme.axaml" />
+                            </mdxaml:MarkdownScrollViewer.Styles>
+                        </mdxaml:MarkdownScrollViewer>
                     </Border>
                 </DockPanel>
             </DataTemplate>
@@ -40,13 +54,17 @@
                         Source="{Binding Avatar}" />
                     <Border
                         MaxWidth="500"
-                        HorizontalAlignment="Left"
-                        Background="#f4f6f8"
-                        BorderThickness="1"
                         Padding="8,4"
+                        HorizontalAlignment="Left"
+                        BorderThickness="1"
+                        Background="{DynamicResource Markdown.DefaultBackgroundBrush}"
+                        BorderBrush="{DynamicResource Markdown.DefaultBorderBrush}"
                         CornerRadius="4,4,4,4">
-                        <mdxaml:MarkdownScrollViewer
-                            Markdown="{Binding Body}" />
+                        <mdxaml:MarkdownScrollViewer Markdown="{Binding Body}">
+                            <mdxaml:MarkdownScrollViewer.Styles>
+                                <StyleInclude Source="VueTheme.axaml" />
+                            </mdxaml:MarkdownScrollViewer.Styles>
+                        </mdxaml:MarkdownScrollViewer>
                     </Border>
                 </DockPanel>
             </DataTemplate>
@@ -61,10 +79,11 @@
                         Source="{Binding Avatar}" />
                     <Border
                         MaxWidth="500"
-                        HorizontalAlignment="Left"
-                        Background="#f4f6f8"
-                        BorderThickness="1"
                         Padding="8,4"
+                        HorizontalAlignment="Left"
+                        Background="{DynamicResource Markdown.DefaultBackgroundBrush}"
+                        BorderBrush="{DynamicResource Markdown.DefaultBorderBrush}"
+                        BorderThickness="1"
                         CornerRadius="4,4,4,4">
                         <ItemsControl ItemsSource="{Binding Images}">
                             <ItemsControl.ItemsPanel>
@@ -74,9 +93,15 @@
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Border Padding="4" BorderThickness="1" Height="160" Width="160">
+                                    <Border
+                                        Width="160"
+                                        Height="160"
+                                        Padding="4"
+                                        Background="{DynamicResource Markdown.DefaultBorderBrush}"
+                                        BorderBrush="{DynamicResource Markdown.DefaultBackgroundBrush}"
+                                        BorderThickness="1">
                                         <Image
-                                            Source="{Binding .,Converter={x:Static cvt:UrlToBitmapConverter.Instance}}" />
+                                            Source="{Binding ., Converter={x:Static cvt:UrlToBitmapConverter.Instance}}" />
                                     </Border>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>

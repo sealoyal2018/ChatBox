@@ -2,10 +2,38 @@
     x:Class="ChatBox.App"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    RequestedThemeVariant="Default">
+    RequestedThemeVariant="Dark">
     <!--  "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options.  -->
 
     <Application.Styles>
         <FluentTheme />
     </Application.Styles>
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key='Dark'>
+                    <SolidColorBrush x:Key="Markdown.DefaultTextBrush" Color="#e1eeee" />
+                    <SolidColorBrush x:Key="Markdown.DefaultBorderBrush" Color="#000000" />
+                    <SolidColorBrush x:Key="Markdown.DefaultBackgroundBrush" Color="#1f1f1f" />
+                    <SolidColorBrush x:Key="Markdown.SecondaryBackgroundBrush" Color="#1a1a1a" />
+                    <SolidColorBrush x:Key="Markdown.ThreeBackgroundBrush" Color="#171717" />
+                    <SolidColorBrush x:Key="Markdown.AccentBrush" Color="#42b983" />
+                    <SolidColorBrush x:Key="Markdown.AssistBrush" Color="#f3b37f" />
+                    <SolidColorBrush x:Key="Markdown.PrimaryBrush" Color="#191919" />
+                    <SolidColorBrush x:Key="Markdown.SecondaryBrush" Color="#232f29" />
+                </ResourceDictionary>
+                <ResourceDictionary x:Key='Light'>
+                    <SolidColorBrush x:Key="Markdown.DefaultTextBrush" Color="#34495e" />
+                    <SolidColorBrush x:Key="Markdown.DefaultBorderBrush" Color="#DEDEDE" />
+                    <SolidColorBrush x:Key="Markdown.DefaultBackgroundBrush" Color="#ffffff" />
+                    <SolidColorBrush x:Key="Markdown.SecondaryBackgroundBrush" Color="#f8f8f8" />
+                    <SolidColorBrush x:Key="Markdown.ThreeBackgroundBrush" Color="#f2f2f2" />
+                    <SolidColorBrush x:Key="Markdown.AccentBrush" Color="#42b983" />
+                    <SolidColorBrush x:Key="Markdown.AssistBrush" Color="#e76800" />
+                    <SolidColorBrush x:Key="Markdown.PrimaryBrush" Color="#fafafa" />
+                    <SolidColorBrush x:Key="Markdown.SecondaryBrush" Color="#ecf8f2" />
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
 </Application>

@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Markup.Xaml.Styling;
+using Avalonia.Styling;
 using ChatBox.Models;
-using ChatBox.Modules.Chats.Models;
+using Markdown.Avalonia.Full;
 
 namespace ChatBox.Components;
 
@@ -21,5 +24,4 @@ public partial class ChatMessage : UserControl
     {
         InitializeComponent();
     }
-    
 }
