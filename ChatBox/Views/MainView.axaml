@@ -13,5 +13,7 @@
     ExtendClientAreaChromeHints="PreferSystemChrome"
     ExtendClientAreaToDecorationsHint="True"
     mc:Ignorable="d">
-    <ContentControl s:View.Model="{Binding ShellViewModel}" />
+    <Border BorderBrush="#c0c0c0" BorderThickness="1">
+        <ContentPresenter s:View.Model="{Binding ShellViewModel}" />
+    </Border>
 </Window>

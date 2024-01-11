@@ -4,7 +4,6 @@ using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 using Avalonia.Metadata;
 using ChatBox.Models;
-using ChatBox.Modules.Chats.Models;
 
 namespace ChatBox.Components;
 

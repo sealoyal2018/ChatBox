@@ -2,7 +2,7 @@
 using OpenAI;
 using Stylet;
 
-namespace ChatBox.Modules.Chats.ViewModels;
+namespace ChatBox.ViewModels;
 
 public class ChatSettingViewModel: PropertyChangedBase
 {

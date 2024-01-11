@@ -1,4 +1,4 @@
-﻿namespace ChatBox.Modules.Chats.Models;
+﻿namespace ChatBox.Models;
 
 public enum AiType
 {

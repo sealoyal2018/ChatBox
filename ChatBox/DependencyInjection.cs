@@ -1,9 +1,10 @@
 ﻿using ChatBox.Interfaces;
 using ChatBox.Modules.Chats.Services;
-using ChatBox.Modules.Chats.ViewModels;
+using ChatBox.Services;
+using ChatBox.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace ChatBox.Modules.Chats;
+namespace ChatBox;
 
 public static class DependencyInjection
 {
@@ -15,7 +16,6 @@ public static class DependencyInjection
         services.AddSingleton<IChatSetting, CleanRecordSetting>();
         services.AddSingleton<IChatSetting, AboutSetting>();
         services.AddSingleton<IChatSetting, PromptSetting>();
-        services.AddSingleton<IAppModule, HomeViewModel>();
         return services;
     }
 }

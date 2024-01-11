@@ -1,6 +1,5 @@
 using Avalonia.Markup.Xaml;
 using ChatBox.Modules.Chats;
-using ChatBox.Modules.Paints;
 using ChatBox.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -16,7 +15,6 @@ public partial class App : ChatBoxApplication
     protected override void Configuration(ServiceCollection services)
     {
         services.AddChats();
-        services.AddPaints();
         services.AddSingleton<MainViewModel>();
         services.AddSingleton<ShellViewModel>();
         services.AddHttpClient();

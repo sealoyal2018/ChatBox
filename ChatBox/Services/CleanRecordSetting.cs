@@ -2,10 +2,10 @@
 using System.Linq;
 using System.Windows.Input;
 using ChatBox.Interfaces;
-using ChatBox.Modules.Chats.ViewModels;
+using ChatBox.ViewModels;
 using Stylet.Avalonia;
 
-namespace ChatBox.Modules.Chats.Services;
+namespace ChatBox.Services;
 
 public class CleanRecordSetting : IChatSetting
 {
@@ -21,7 +21,7 @@ public class CleanRecordSetting : IChatSetting
 
     private void Execute()
     {
-        var homeViewModel = IoC.GetAll<IAppModule>().OfType<HomeViewModel>().FirstOrDefault();
+        var homeViewModel = IoC.GetAll<IAppModule>().OfType<ShellViewModel>().FirstOrDefault();
         Debug.Assert(homeViewModel != null);
         // var homeViewModel = IoC.Get<HomeViewModel>();
         homeViewModel.ChatGroups.Clear();
@@ -30,7 +30,7 @@ public class CleanRecordSetting : IChatSetting
 
     private bool CanExecute()
     {
-        var homeViewModel = IoC.GetAll<IAppModule>().OfType<HomeViewModel>().FirstOrDefault();
+        var homeViewModel = IoC.GetAll<IAppModule>().OfType<ShellViewModel>().FirstOrDefault();
         if (homeViewModel is null)
             return false;
         return homeViewModel.ChatGroups.Count > 0;

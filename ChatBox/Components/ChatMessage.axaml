@@ -19,98 +19,52 @@
     </UserControl.Styles>
 
     <UserControl.DataTemplates>
-        <local:ChatTemplateSelector>
-            <DataTemplate x:Key="UserChat" DataType="m:UserChat">
-                <DockPanel HorizontalAlignment="Stretch" LastChildFill="True">
-                    <Image
-                        Width="32"
-                        Height="32"
-                        VerticalAlignment="Top"
-                        DockPanel.Dock="Right"
-                        Source="{Binding Avatar}" />
-                    <Border
-                        MaxWidth="500"
-                        Padding="8,4"
-                        HorizontalAlignment="Right"
-                        Background="{DynamicResource Markdown.DefaultBackgroundBrush}"
-                        BorderBrush="{DynamicResource Markdown.DefaultBorderBrush}"
-                        BorderThickness="1"
-                        CornerRadius="4,4,4,4">
-                        <mdxaml:MarkdownScrollViewer Markdown="{Binding Body}">
-                            <mdxaml:MarkdownScrollViewer.Styles>
-                                <StyleInclude Source="VueTheme.axaml" />
-                            </mdxaml:MarkdownScrollViewer.Styles>
-                        </mdxaml:MarkdownScrollViewer>
-                    </Border>
-                </DockPanel>
-            </DataTemplate>
-            <DataTemplate x:Key="TextBotChat" DataType="m:TextBotChat">
-                <DockPanel HorizontalAlignment="Stretch" LastChildFill="True">
-                    <Image
-                        Width="32"
-                        Height="32"
-                        VerticalAlignment="Top"
-                        DockPanel.Dock="Left"
-                        Source="{Binding Avatar}" />
-                    <Border
-                        MaxWidth="500"
-                        Padding="8,4"
-                        HorizontalAlignment="Left"
-                        BorderThickness="1"
-                        Background="{DynamicResource Markdown.DefaultBackgroundBrush}"
-                        BorderBrush="{DynamicResource Markdown.DefaultBorderBrush}"
-                        CornerRadius="4,4,4,4">
-                        <mdxaml:MarkdownScrollViewer Markdown="{Binding Body}">
-                            <mdxaml:MarkdownScrollViewer.Styles>
-                                <StyleInclude Source="VueTheme.axaml" />
-                            </mdxaml:MarkdownScrollViewer.Styles>
-                        </mdxaml:MarkdownScrollViewer>
-                    </Border>
-                </DockPanel>
-            </DataTemplate>
-
-            <DataTemplate x:Key="ImageBotChat" DataType="m:ImageBotChat">
-                <DockPanel HorizontalAlignment="Stretch" LastChildFill="True">
-                    <Image
-                        Width="32"
-                        Height="32"
-                        VerticalAlignment="Top"
-                        DockPanel.Dock="Left"
-                        Source="{Binding Avatar}" />
-                    <Border
-                        MaxWidth="500"
-                        Padding="8,4"
-                        HorizontalAlignment="Left"
-                        Background="{DynamicResource Markdown.DefaultBackgroundBrush}"
-                        BorderBrush="{DynamicResource Markdown.DefaultBorderBrush}"
-                        BorderThickness="1"
-                        CornerRadius="4,4,4,4">
-                        <ItemsControl ItemsSource="{Binding Images}">
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <WrapPanel />
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <Border
-                                        Width="160"
-                                        Height="160"
-                                        Padding="4"
-                                        Background="{DynamicResource Markdown.DefaultBorderBrush}"
-                                        BorderBrush="{DynamicResource Markdown.DefaultBackgroundBrush}"
-                                        BorderThickness="1">
-                                        <Image
-                                            Source="{Binding ., Converter={x:Static cvt:UrlToBitmapConverter.Instance}}" />
-                                    </Border>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </Border>
-                </DockPanel>
-            </DataTemplate>
-
-        </local:ChatTemplateSelector>
+        <!-- <local:ChatTemplateSelector> -->
+        <!--     <DataTemplate x:Key="UserChat" DataType="m:UserChat"> -->
+        <!--         <DockPanel HorizontalAlignment="Stretch" LastChildFill="True"> -->
+        <!--             <Border Width="40" Height="40"  -->
+        <!--                     CornerRadius="4"  -->
+        <!--                     VerticalAlignment="Top" -->
+        <!--                     DockPanel.Dock="Left"> -->
+        <!--                 <Image Source="{Binding Avatar}" /> -->
+        <!--             </Border> -->
+        <!--             <Border -->
+        <!--                 Padding="8,4" -->
+        <!--                 Background="{DynamicResource Markdown.DefaultBackgroundBrush}" -->
+        <!--                 BorderBrush="{DynamicResource Markdown.DefaultBorderBrush}" -->
+        <!--                 BorderThickness="1" -->
+        <!--                 CornerRadius="4,4,4,4"> -->
+        <!--                 <mdxaml:MarkdownScrollViewer Markdown="{Binding Body}"> -->
+        <!--                     <mdxaml:MarkdownScrollViewer.Styles> -->
+        <!--                         <StyleInclude Source="VueTheme.axaml" /> -->
+        <!--                     </mdxaml:MarkdownScrollViewer.Styles> -->
+        <!--                 </mdxaml:MarkdownScrollViewer> -->
+        <!--             </Border> -->
+        <!--         </DockPanel> -->
+        <!--     </DataTemplate> -->
+        <!--     <DataTemplate x:Key="TextBotChat" DataType="m:TextBotChat"> -->
+        <!--         <DockPanel HorizontalAlignment="Stretch" LastChildFill="True"> -->
+        <!--             <Border Width="40" Height="40"  -->
+        <!--                     CornerRadius="4"  -->
+        <!--                     VerticalAlignment="Top" -->
+        <!--                     DockPanel.Dock="Left"> -->
+        <!--                 <Image Source="{Binding Avatar}" /> -->
+        <!--             </Border> -->
+        <!--             <Border -->
+        <!--                 Padding="8,4" -->
+        <!--                 BorderThickness="1" -->
+        <!--                 Background="{DynamicResource Markdown.DefaultBackgroundBrush}" -->
+        <!--                 BorderBrush="{DynamicResource Markdown.DefaultBorderBrush}" -->
+        <!--                 CornerRadius="4,4,4,4"> -->
+        <!--                 <mdxaml:MarkdownScrollViewer Markdown="{Binding Body}"> -->
+        <!--                     <mdxaml:MarkdownScrollViewer.Styles> -->
+        <!--                         <StyleInclude Source="VueTheme.axaml" /> -->
+        <!--                     </mdxaml:MarkdownScrollViewer.Styles> -->
+        <!--                 </mdxaml:MarkdownScrollViewer> -->
+        <!--             </Border> -->
+        <!--         </DockPanel> -->
+        <!--     </DataTemplate> -->
+        <!-- </local:ChatTemplateSelector> -->
     </UserControl.DataTemplates>
 
     <ItemsControl
@@ -122,5 +76,35 @@
                 <StackPanel HorizontalAlignment="Stretch" Spacing="8" />
             </ItemsPanelTemplate>
         </ItemsControl.ItemsPanel>
+        <ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <Border Padding="0,8">
+                    <DockPanel HorizontalAlignment="Stretch" LastChildFill="True">
+                        <Border Width="30" Height="30" 
+                                CornerRadius="4" 
+                                VerticalAlignment="Top"
+                                DockPanel.Dock="Left">
+                            <Image Source="{Binding Avatar}" />
+                        </Border>
+                        <Border
+                            Margin="8,0,0,0"
+                            Padding="8,4"
+                            BorderThickness="0"
+                            Background="{DynamicResource Markdown.DefaultBackgroundBrush}"
+                            BorderBrush="{DynamicResource Markdown.DefaultBorderBrush}"
+                            CornerRadius="4,4,4,4">
+                            <DockPanel LastChildFill="True">
+                                <TextBlock FontWeight="ExtraBold" DockPanel.Dock="Top" VerticalAlignment="Center" Text="{Binding Name}"></TextBlock>
+                                <mdxaml:MarkdownScrollViewer Markdown="{Binding Body}">
+                                    <mdxaml:MarkdownScrollViewer.Styles>
+                                        <StyleInclude Source="VueTheme.axaml" />
+                                    </mdxaml:MarkdownScrollViewer.Styles>
+                                </mdxaml:MarkdownScrollViewer>
+                            </DockPanel>
+                        </Border>
+                    </DockPanel>
+                </Border>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
     </ItemsControl>
 </UserControl>

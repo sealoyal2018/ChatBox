@@ -3,50 +3,110 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:i="https://github.com/projektanker/icons.avalonia"
     xmlns:s="using:Stylet.Xaml"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
-    mc:Ignorable="d">
-    <Grid ColumnDefinitions="60,*">
-        <Border Padding="12"
-                BorderBrush="LightGray"
-                Grid.Row="0"
-                Grid.Column="0"
-                BorderThickness="0,0,1,0">
-            <Grid RowDefinitions="*,auto">
-                <ItemsControl Grid.Row="0" ItemsSource="{Binding AppModules}">
-                    <ItemsControl.Styles>
-                        <Style Selector="Border.selected">
-                            <Setter Property="Background" Value="Brown" />
-                        </Style>
-                        <Style Selector="Border.selected:pointerover">
-                            <Setter Property="Background" Value="Linen" />
-                        </Style>
-                    </ItemsControl.Styles>
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Spacing="12" />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Border PointerReleased="{s:Action OpenModule}" Background="Transparent"
-                                    Classes="selected">
-                                <DockPanel IsHitTestVisible="False" Background="Transparent" HorizontalAlignment="Center" LastChildFill="True">
-                                    <i:Icon Value="{Binding Icon}" DockPanel.Dock="Top" />
-                                    <TextBlock Margin="0,8,0,0" VerticalAlignment="Center"
-                                               Text="{Binding DisplayName}">
-                                    </TextBlock>
-                                </DockPanel>
+    xmlns:viewModels="clr-namespace:ChatBox.ViewModels"
+    xmlns:viewModels1="clr-namespace:ChatBox.ViewModels">
+    <Grid ColumnDefinitions="220,*">
+        <ThemeVariantScope RequestedThemeVariant="Dark">
+            <Border Background="Black" Padding="12">
+                <Grid RowDefinitions="auto,*,auto">
+                    <Button
+                        HorizontalAlignment="Stretch"
+                        Height="40"
+                        BorderBrush="LightGray"
+                        Click="{s:Action NewChat}"
+                        BorderThickness="0"
+                        Background="Transparent"
+                        VerticalContentAlignment="Center">
+                        <DockPanel>
+                            <Border DockPanel.Dock="Left" Padding="4" CornerRadius="12" Background="WhiteSmoke">
+                                <Image Source="/Assets/logo.png"></Image>
                             </Border>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-                <Button Grid.Row="1" i:Attached.Icon="fa-solid fa-circle-half-stroke" Click="{s:Action ChangeTheme}" />
-            </Grid>
-        </Border>
-        <ContentControl Grid.Column="1" s:View.Model="{Binding ActiveItem}" />
+                            <TextBlock Margin="8,0,0,0" Text="New Chat" VerticalAlignment="Center"
+                                       HorizontalAlignment="Left" />
+                            <i:Icon DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Center"
+                                    Value="fa-solid fa-pen-to-square">
+                            </i:Icon>
+                        </DockPanel>
+                    </Button>
+
+                    <ScrollViewer Grid.Row="1" Margin="0,12,0,0">
+                        <ItemsControl ItemsSource="{Binding ChatGroups}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel VerticalAlignment="Top" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate DataType="viewModels1:ChatViewModel">
+                                    <Border
+                                        PointerReleased="{s:Action SelectChat}"
+                                            Padding="8,4"
+                                            CornerRadius="4"
+                                            Margin="0,2"
+                                            BorderThickness="0"
+                                            Height="30"
+                                            Classes.messageContainer="true"
+                                            Classes.messageSelected="{Binding IsActive}"
+                                            BorderBrush="Gray">
+                                        <Border.Styles>
+                                            <Style Selector="Border.messageContainer">
+                                                <Setter Property="Background" Value="Transparent" />
+                                                <Style Selector="^:pointerover">
+                                                    <Setter Property="Background" Value="#202123" />
+                                                    <Setter Property="Cursor" Value="Hand" />
+                                                </Style>
+                                            </Style>
+                                            <Style Selector="Border.messageSelected">
+                                                <Setter Property="Background" Value="#343541"></Setter>
+                                            </Style>
+                                        </Border.Styles>
+                                        <DockPanel>
+                                            <TextBlock Background="Transparent"
+                                                       HorizontalAlignment="Stretch"
+                                                       Text="{Binding DisplayName}"
+                                                        VerticalAlignment="Center">
+                                            </TextBlock>
+                                            <i:Icon DockPanel.Dock="Right" HorizontalAlignment="Right"
+                                                    PointerReleased="{s:Action ShowMoreFlyout}"
+                                                    VerticalAlignment="Center" Value="fa-solid fa-ellipsis">
+                                                <FlyoutBase.AttachedFlyout>
+                                                    <Flyout PlacementAnchor="Left" >
+                                                        <TextBlock Text="Red Rectangle Flyout." />
+                                                    </Flyout>
+                                                </FlyoutBase.AttachedFlyout>
+                                            </i:Icon>
+                                        </DockPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+
+                    <ItemsControl Grid.Row="2" ItemsSource="{Binding Settins}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border>
+                                    <Button
+                                        Command="{Binding ActiveCommand}"
+                                        HorizontalAlignment="Stretch"
+                                        Background="Transparent"
+                                        BorderThickness="0">
+                                        <DockPanel LastChildFill="True">
+                                            <i:Icon Value="{Binding Icon}" DockPanel.Dock="Left" />
+                                            <TextBlock Margin="8,0,0,0" VerticalAlignment="Center"
+                                                       Text="{Binding DisplayName}">
+                                            </TextBlock>
+                                        </DockPanel>
+                                    </Button>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Grid>
+            </Border>
+        </ThemeVariantScope>
+        <ContentControl Grid.Row="0" Margin="0,30,0,0" Grid.Column="1" s:View.Model="{Binding ActiveItem}" />
     </Grid>
 </UserControl>

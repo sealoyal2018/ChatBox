@@ -40,19 +40,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Modules\Chats\Components\" />
-    <Folder Include="Modules\Paints\Interfaces\" />
-    <Folder Include="Modules\Paints\Services\" />
-    <Folder Include="Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Update="Modules\Chats\Views\ChatSettingView.axaml.cs">
+    <Compile Update="Views\ChatSettingView.axaml.cs">
       <DependentUpon>ChatSettingView.axaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Modules\Chats\Views\ChatView.axaml.cs">
+    <Compile Update="Views\ChatView.axaml.cs">
       <DependentUpon>ChatView.axaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Modules\Chats\Views\HomeView.axaml" />
   </ItemGroup>
 </Project>

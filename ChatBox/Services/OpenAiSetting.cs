@@ -1,10 +1,10 @@
 ﻿using System.Windows.Input;
 using ChatBox.Interfaces;
-using ChatBox.Modules.Chats.ViewModels;
+using ChatBox.ViewModels;
 using Stylet;
 using Stylet.Avalonia;
 
-namespace ChatBox.Modules.Chats.Services;
+namespace ChatBox.Services;
 
 public class OpenAiSetting : IChatSetting
 {

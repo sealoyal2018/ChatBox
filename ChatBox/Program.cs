@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Threading;
-
 using Avalonia;
 using Avalonia.Media;
 using Avalonia.Media.Fonts;
-
+using ChatBox.Extensions;
 using Projektanker.Icons.Avalonia;
 using Projektanker.Icons.Avalonia.FontAwesome;
 
@@ -21,17 +20,18 @@ internal class Program
         .StartWithClassicDesktopLifetime(args);
 
     // Avalonia configuration, don't remove; also used by visual designer.
-    private static AppBuilder BuildAvaloniaApp()
+    public static AppBuilder BuildAvaloniaApp()
     {
         IconProvider.Current
             .Register<FontAwesomeIconProvider>();
-        
+
         return AppBuilder.Configure<App>()
             .UsePlatformDetect()
-            .WithInterFont()
-            .With(new FontManagerOptions()
+            .UseCustomFontManager(opts =>
             {
-                FontFallbacks = [new FontFallback{ FontFamily = "avares://ChatBox/Assets/fonts/LXGWWenKai.ttf#LXGW WenKai" }],
+                opts.DefaultFontFamily = "fonts:CustomFontFamilies#LXGW WenKai";
+                opts.Key = new Uri("fonts:CustomFontFamilies", UriKind.Absolute);
+                opts.Source = new Uri("avares://ChatBox/Assets/fonts", UriKind.Absolute);
             })
             .LogToTrace();
     }

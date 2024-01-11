@@ -23,6 +23,7 @@ public class TextBotChat : Chat, IHandle<ChatReceiveMessage<List<ChatChoiceRespo
     public override Bitmap Avatar => new Bitmap(AssetLoader.Open(new System.Uri("avares://ChatBox/Assets/openai.png")));
 
 
+    public override string Name => "ChatGPT";
     public override string Body => bodyBuilder.ToString();
 
     public TextBotChat()

@@ -1,7 +1,7 @@
 ﻿using System.Windows.Input;
 using ChatBox.Interfaces;
 
-namespace ChatBox.Modules.Chats.Services;
+namespace ChatBox.Services;
 internal class PromptSetting : IChatSetting
 {
     public string DisplayName => "提示词";

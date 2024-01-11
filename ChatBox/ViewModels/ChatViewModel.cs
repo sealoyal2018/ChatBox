@@ -8,7 +8,7 @@ using OpenAI.ObjectModels.SharedModels;
 using Stylet;
 using Stylet.Avalonia.Primitive;
 
-namespace ChatBox.Modules.Chats.ViewModels;
+namespace ChatBox.ViewModels;
 public class ChatViewModel : Screen
 {
     private readonly ChatSettingViewModel _chatSettingViewModel;
@@ -41,6 +41,11 @@ public class ChatViewModel : Screen
             NotifyOfPropertyChange(nameof(VisibleChat));
         };
         DisplayName = "新的对话";
+    }
+
+    protected override void OnActivate()
+    {
+        base.OnActivate();
     }
 
     public async Task SendMessage()

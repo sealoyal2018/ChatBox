@@ -1,6 +1,6 @@
 using Avalonia.Controls;
 
-namespace ChatBox.Modules.Chats.Views;
+namespace ChatBox.Views;
 public partial class ChatView : UserControl
 {
     public ChatView()
